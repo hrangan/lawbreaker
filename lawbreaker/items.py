@@ -1,5 +1,7 @@
 import random
+
 from collections import OrderedDict
+
 from exceptions import InvalidItemCategoryException, InvalidItemAttribute
 
 
@@ -74,13 +76,13 @@ class Items(object):
                ("Axe", 2, 'd8', 1, 3),
                ("Flail", 2, 'd8', 1, 3),
                ("Mace", 2, 'd10', 1, 3),
-               ("Halberd (2h)", 3, 'd10', 2, 3),
-               ("War Hammer (2h)", 3, 'd10', 2, 3),
-               ("Long Sword (2h)", 3, 'd10', 2, 3),
-               ("Battle Axe (2h)", 3, 'd10', 2, 3),
+               ("Halberd", 3, 'd10', 2, 3),
+               ("War Hammer", 3, 'd10', 2, 3),
+               ("Long Sword", 3, 'd10', 2, 3),
+               ("Battle Axe", 3, 'd10', 2, 3),
                ("Sling", 1, 'd4', 1, 3),
-               ("Bow (2h)", 2, 'd6', 2, 3),
-               ("Crossbow (2h)", 3, 'd8', 2, 3)]
+               ("Bow", 2, 'd6', 2, 3),
+               ("Crossbow", 3, 'd8', 2, 3)]
               ]
 
     armor = [Armor(name, slots, defense, quality) for (name, slots, defense, quality) in

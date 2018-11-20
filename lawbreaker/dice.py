@@ -1,5 +1,5 @@
-import random
 import re
+import random
 
 from exceptions import InvalidDiceFormat
 

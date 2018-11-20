@@ -58,11 +58,11 @@ class Inventory(object):
                      and (xitem.type == item.type)]
         self._inventory.append(item)
 
-    def format_inventory(self):
+    def __str__(self):
         format_string = "{0: <25}{1: <10}{2:^15}"
         inventory_strings = []
         inventory_strings.append("-"*50)
-        for item in sorted(self._inventory, key=self.format_priority):
+        for item in self.sorted():
             if item.equipped:
                 name = '* %s' % item.name
             else:
@@ -71,6 +71,9 @@ class Inventory(object):
         inventory_strings.insert(0, format_string
                                  .format("Item", "Type", "Slots %s/%s" % self.slots))
         return "\n".join(inventory_strings)
+
+    def sorted(self):
+        return sorted(self._inventory, key=self.format_priority)
 
     def format_priority(self, item):
         return ['Weapon', 'Armor', 'Gear', 'Food'].index(item.type)

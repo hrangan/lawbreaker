@@ -1,12 +1,12 @@
-#!/usr/bin/env python
-
+import json
 import random
-import argparse
+
 from collections import OrderedDict
+
+from lawbreaker.dice import dice
+from lawbreaker.inventory import Inventory, InventoryFullException
 from lawbreaker.items import Items, Food, Gear
 from lawbreaker.traits import Traits
-from lawbreaker.inventory import Inventory, InventoryFullException
-from lawbreaker.dice import dice
 
 
 class Character(object):
@@ -22,6 +22,7 @@ class Character(object):
 
         self.create_stats()
         self.basic_loadout()
+        self.traits = Traits()
 
         for x in range(level - 1):
             self._levelup(x+2)
@@ -29,8 +30,22 @@ class Character(object):
     def __str__(self):
         return "\n\n\n".join([self.format_basic(),
                               self.format_stats(),
-                              self.inventory.format_inventory(),
-                              Traits.format_traits(self.name)])
+                              str(self.inventory),
+                              str(self.traits)])
+
+    def __repr__(self):
+        character = OrderedDict({'name': self.name,
+                                 'xp': self.xp,
+                                 'level': self.level,
+                                 'hit_points': self.hit_points,
+                                 'attributes': self.stats,
+                                 'armor_defense': self.inventory.armor_defense,
+                                 'inventory': [item.details for item in self.inventory.sorted()],
+                                 'used_slots': self.inventory.used_slots,
+                                 'total_slots': self.inventory.total_slots,
+                                 'traits': self.traits.traits})
+
+        return json.dumps(character)
 
     @property
     def armor_defense(self):
@@ -53,20 +68,20 @@ class Character(object):
         stat_strings.append(format_string.format("Defense", "Ability", "Bonus"))
         stat_strings.append("-"*50)
         for stat, bonus in self.stats.iteritems():
-            stat_strings.append(format_string.format(str(10+bonus), stat, str(bonus)))
+            stat_strings.append(format_string.format(str(bonus), stat, str(bonus - 10)))
         stat_strings.append("")
         stat_strings.append(format_string.format(str(self.armor_defense),
-                            "Armor", str(self.armor_defense-10)))
+                            "Armor", str(self.armor_defense - 10)))
         return "\n".join(stat_strings)
 
     def create_stats(self):
         stats = OrderedDict()
-        stats["Strength"] = min(dice._3d6())
-        stats["Dexterity"] = min(dice._3d6())
-        stats["Constitution"] = min(dice._3d6())
-        stats["Intelligence"] = min(dice._3d6())
-        stats["Wisdom"] = min(dice._3d6())
-        stats["Charisma"] = min(dice._3d6())
+        stats["Strength"] = 10 + min(dice._3d6())
+        stats["Dexterity"] = 10 + min(dice._3d6())
+        stats["Constitution"] = 10 + min(dice._3d6())
+        stats["Intelligence"] = 10 + min(dice._3d6())
+        stats["Wisdom"] = 10 + min(dice._3d6())
+        stats["Charisma"] = 10 + min(dice._3d6())
 
         return stats
 
@@ -87,7 +102,7 @@ class Character(object):
         weapon = Items.get('weapon')
         self.inventory.add(weapon, equip=True)
         if weapon.name in ("Bow", "Crossbow"):
-            self.inventory.add(Gear("Arrows (20)"))
+            self.inventory.add(Gear("Arrows, 20"))
 
     def add_rations(self):
         self.inventory.add(Food("Travel rations (1 day)"))
@@ -117,13 +132,3 @@ class Character(object):
             self.hit_points += 1
         else:
             self.hit_points = hp
-
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Process some integers.")
-    # parser.add_argument("--name", dest="name", action="store", default="_"*20)
-    parser.add_argument("--level", dest="level", action="store", type=int, default=1)
-    parser.add_argument("name", action="store", default=["_"*20], nargs='*')
-    args = parser.parse_args()
-    char = Character(name=" ".join(args.name), level=args.level)
-    print char

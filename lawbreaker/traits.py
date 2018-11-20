@@ -38,27 +38,24 @@ class Traits(object):
                  "Neutrality", "Neutrality", "Neutrality", "Neutrality", "Neutrality",
                  "Chaos", "Chaos", "Chaos", "Chaos", "Chaos"]
 
-    @classmethod
-    def get_traits(cls):
-        return {"physique": random.choice(cls.physique).lower(),
-                "face": random.choice(cls.face).lower(),
-                "skin": random.choice(cls.skin).lower(),
-                "hair": random.choice(cls.hair).lower(),
-                "clothing": random.choice(cls.clothing).lower(),
-                "virtue": random.choice(cls.virtues).lower(),
-                "vice": random.choice(cls.vices).lower(),
-                "speech": random.choice(cls.speech).lower(),
-                "background": random.choice(cls.background).lower(),
-                "misfortune": random.choice(cls.misfortunes).lower(),
-                "alignment": random.choice(cls.alignment).lower()}
+    def __init__(self):
+        self.traits = {"physique": random.choice(Traits.physique).lower(),
+                       "face": random.choice(Traits.face).lower(),
+                       "skin": random.choice(Traits.skin).lower(),
+                       "hair": random.choice(Traits.hair).lower(),
+                       "clothing": random.choice(Traits.clothing).lower(),
+                       "virtue": random.choice(Traits.virtues).lower(),
+                       "vice": random.choice(Traits.vices).lower(),
+                       "speech": random.choice(Traits.speech).lower(),
+                       "background": random.choice(Traits.background).lower(),
+                       "misfortune": random.choice(Traits.misfortunes).lower(),
+                       "alignment": random.choice(Traits.alignment).lower()}
 
-    @classmethod
-    def format_traits(cls, name):
-        choices = cls.get_traits()
+    def __str__(self):
         description_strings = ["  - Has a {physique} physique, a {face} face, {skin} skin and {hair} hair."
                                "\n  - Clothes are {clothing}, and speech {speech}."
                                "\n  - Is {virtue}, but {vice}."
                                "\n  - Has been a {background} in the past. Has been {misfortune} in the past."
                                "\n  - Favours {alignment}."]
-        description = "".join(description_strings).format(name=name, **choices)
+        description = "".join(description_strings).format(**self.traits)
         return '\n'.join(['Description:', '-'*12, description])
