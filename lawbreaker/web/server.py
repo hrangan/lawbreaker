@@ -7,11 +7,16 @@ from collections import OrderedDict
 from bottle import route, run, template, static_file
 
 from lawbreaker.character import Character
+from lawbreaker.names import Name
 
 
 @route('/')
 def main():
-    character = Character(name=" ")
+    """
+    Names courtesy of
+    https://www.reddit.com/r/DnDBehindTheScreen/comments/50pcg1/a_post_about_names_names_for_speakers_of_the/
+    """
+    character = Character(name=Name.get())
     return template('templates/index', content=json.loads(repr(character), object_pairs_hook=OrderedDict))
 
 
