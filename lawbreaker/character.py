@@ -5,12 +5,8 @@ import argparse
 from collections import OrderedDict
 from lawbreaker.items import Items, Food, Gear
 from lawbreaker.traits import Traits
-from lawbreaker.inventory import Inventory
+from lawbreaker.inventory import Inventory, InventoryFullException
 from lawbreaker.dice import dice
-
-
-class NoSpaceError(Exception):
-    pass
 
 
 class Character(object):
@@ -75,10 +71,17 @@ class Character(object):
         return stats
 
     def basic_loadout(self):
-        self.add_armor()
-        self.add_weapon()
-        self.add_gear()
-        self.add_rations()
+        while True:
+            try:
+                self.add_gear()
+                self.add_rations()
+                self.add_armor()
+                self.add_weapon()
+            except InventoryFullException:
+                self.inventory.delete_all()
+                continue
+            else:
+                break
 
     def add_weapon(self):
         weapon = Items.get('weapon')
@@ -118,8 +121,9 @@ class Character(object):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Process some integers.")
-    parser.add_argument("--name", dest="name", action="store", default="_"*20)
+    # parser.add_argument("--name", dest="name", action="store", default="_"*20)
     parser.add_argument("--level", dest="level", action="store", type=int, default=1)
+    parser.add_argument("name", action="store", default=["_"*20], nargs='*')
     args = parser.parse_args()
-    char = Character(name=args.name, level=args.level)
+    char = Character(name=" ".join(args.name), level=args.level)
     print char

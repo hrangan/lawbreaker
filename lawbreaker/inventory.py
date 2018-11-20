@@ -1,5 +1,4 @@
-class InventoryFullException(object):
-    pass
+from exceptions import InventoryFullException
 
 
 class Inventory(object):
@@ -75,3 +74,6 @@ class Inventory(object):
 
     def format_priority(self, item):
         return ['Weapon', 'Armor', 'Gear', 'Food'].index(item.type)
+
+    def delete_all(self):
+        self._inventory = []

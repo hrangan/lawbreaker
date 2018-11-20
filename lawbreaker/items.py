@@ -1,13 +1,6 @@
 import random
 from collections import OrderedDict
-
-
-class InvalidItemCategoryException(Exception):
-    pass
-
-
-class InvalidItemAttribute(Exception):
-    pass
+from exceptions import InvalidItemCategoryException, InvalidItemAttribute
 
 
 class BaseItem(object):

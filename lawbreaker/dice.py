@@ -1,9 +1,7 @@
 import random
 import re
 
-
-class InvalidDiceFormat(Exception):
-    pass
+from exceptions import InvalidDiceFormat
 
 
 class Dice(object):
