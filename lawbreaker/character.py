@@ -123,7 +123,7 @@ class Character(object):
         stats = self.stats.keys()
         while count > 0:
             for stat in random.sample(stats, len(stats)):
-                if (self.stats[stat] < 10) and (dice._1d20()[0] < (10 + self.stats[stat])):
+                if (self.stats[stat] < 20) and (dice._1d20()[0] < (self.stats[stat])):
                     self.stats[stat] += 1
                     count -= 1
                     break
