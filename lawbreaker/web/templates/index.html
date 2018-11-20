@@ -12,11 +12,19 @@
             <!-- Title -->
             <div class="row">
                 <div class="two columns">&nbsp;</div>
-                <div class="four columns" style="font-family:'Sebaldus-Gotisch';font-size:3em;">Lawbreaker</div>
-                <div class="four columns"><b>A character generator for the Knave RPG by Questing Beast</b></div>
+                <div class="eight columns" style="font-family:'Sebaldus-Gotisch';font-size:3em;text-align:center;">Lawbreaker</div>
                 <div class="two columns">&nbsp;</div>
             </div>
-            <br>
+            <div class="row">
+                <div class="two columns">&nbsp;</div>
+                <div class="eight columns" style="text-align:center;"><b>A character generator for the Knave role playing game.</b></div>
+                <div class="two columns">&nbsp;</div>
+            </div>
+            <div class="row">
+                <div class="one columns">&nbsp;</div>
+                <div class="ten columns"><hr></div>
+                <div class="one columns">&nbsp;</div>
+            </div>
             <!-- Basic details -->
             <div class="row">
                 <div class="two columns">&nbsp;</div>
@@ -36,10 +44,15 @@
             <div class="row">
                 <div class="two columns">&nbsp;</div>
                 <div class="eight columns">
-                    Has a {{content['traits']['physique']}} physique, a {{content['traits']['face']}} face, {{content['traits']['skin']}} skin and {{content['traits']['hair']}} hair.
-                    Clothes are {{content['traits']['clothing']}}, and speech {{content['traits']['speech']}}.
+                    {{content['traits']['background'].title()}}.
+                    Wears {{content['traits']['clothing']}} clothes, and has {{content['traits']['speech']}} speech.
+                    Has
+                    {{'an' if content['traits']['physique'][0] in ['a','e', 'i', 'o', 'u'] else 'a'}}
+                    {{content['traits']['physique']}} physique,
+                    {{'an' if content['traits']['face'][0] in ['a','e', 'i', 'o', 'u'] else 'a'}}
+                    {{content['traits']['face']}} face, {{content['traits']['skin']}} skin and {{content['traits']['hair']}} hair.
                     Is {{content['traits']['virtue']}}, but {{content['traits']['vice']}}.
-                    Has been a {{content['traits']['background']}} in the past. Has been {{content['traits']['misfortune']}} in the past.
+                    Has been {{content['traits']['misfortune']}} in the past.
                     Favours {{content['traits']['alignment']}}.
                 </div>
                 <div class="two columns">&nbsp;</div>
@@ -61,7 +74,7 @@
             <div class="row">
                 <div class="three columns">&nbsp;</div>
                 <div class="two columns" style="text-align:center;">{{attribute_defense}}</div>
-                <div class="two columns" style="text-align:center;">{{attribute}}</div>
+                <div class="two columns" style="text-align:center;">{{attribute.title()}}</div>
                 <div class="two columns" style="text-align:center;">{{attribute_defense - 10}}</div>
                 <div class="three columns">&nbsp;</div>
             </div>
@@ -97,7 +110,9 @@
                     <i style="font-size:0.7em;">
                     % if item['type']=='Weapon':
                     <!--d6 damage, 1 hand, 3 quality-->
-                    ({{item['damage']}} damage, {{item['hands']}} hand(s), {{item['quality']}} quality)
+                    ({{item['damage']}} damage, {{item['hands']}}
+                    {{'hands' if item['hands'] > 1 else 'hand'}}
+                    , {{item['quality']}} quality)
                     % end
 
                     % if item['type']=='Armor' and item['name'] in ['Shield', 'Helmet']:
@@ -122,6 +137,21 @@
                 <div class="three columns">&nbsp;</div>
             </div>
             <!-- Footnote -->
+            <br>
+            <div class="row">
+                <div class="twelve columns" style="text-align:center;">
+                    <i style="font-size:0.7em;">
+                    <a href="https://github.com/hrangan/lawbreaker">Lawbreaker</a> by hrangan
+                    ·
+                    <a href="https://www.drivethrurpg.com/product/250888/Knave">Knave</a> by Questing Beast
+                    ·
+                    <a href="https://www.reddit.com/r/DnDBehindTheScreen/comments/50pcg1/a_post_about_names_names_for_speakers_of_the/">Random names</a> courtesy OrkishBlade
+                    </i>
+                </div>
+            </div>
+            <div class="row">
+                &nbsp;
+            </div>
         </div>
     </body>
 </html>

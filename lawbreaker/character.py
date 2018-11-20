@@ -76,12 +76,12 @@ class Character(object):
 
     def create_stats(self):
         stats = OrderedDict()
-        stats["Strength"] = 10 + min(dice._3d6())
-        stats["Dexterity"] = 10 + min(dice._3d6())
-        stats["Constitution"] = 10 + min(dice._3d6())
-        stats["Intelligence"] = 10 + min(dice._3d6())
-        stats["Wisdom"] = 10 + min(dice._3d6())
-        stats["Charisma"] = 10 + min(dice._3d6())
+        stats["strength"] = 10 + min(dice._3d6())
+        stats["dexterity"] = 10 + min(dice._3d6())
+        stats["constitution"] = 10 + min(dice._3d6())
+        stats["intelligence"] = 10 + min(dice._3d6())
+        stats["wisdom"] = 10 + min(dice._3d6())
+        stats["charisma"] = 10 + min(dice._3d6())
 
         return stats
 
