@@ -47,15 +47,16 @@ class Traits(object):
                        "virtue": random.choice(Traits.virtues).lower(),
                        "vice": random.choice(Traits.vices).lower(),
                        "speech": random.choice(Traits.speech).lower(),
-                       "background": random.choice(Traits.background).lower(),
+                       "background": random.choice(Traits.background),
                        "misfortune": random.choice(Traits.misfortunes).lower(),
                        "alignment": random.choice(Traits.alignment).lower()}
 
     def __str__(self):
-        description_strings = ["  - Has a {physique} physique, a {face} face, {skin} skin and {hair} hair."
-                               "\n  - Clothes are {clothing}, and speech {speech}."
-                               "\n  - Is {virtue}, but {vice}."
-                               "\n  - Has been a {background} in the past. Has been {misfortune} in the past."
-                               "\n  - Favours {alignment}."]
-        description = "".join(description_strings).format(**self.traits)
-        return '\n'.join(['Description:', '-'*12, description])
+
+        description_string = ("Traits\n"
+                              "--------------------------------------------------\n"
+                              "{background}.  Wears {clothing} clothes, and has {speech} speech.\n"
+                              "Has a {physique} physique, a {face} face, {skin} skin and {hair} hair.\n"
+                              "Is {virtue}, but {vice}. Has been {misfortune} in the past.\n"
+                              "Favours {alignment}.")
+        return description_string.format(**self.traits)

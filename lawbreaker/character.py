@@ -68,7 +68,7 @@ class Character(object):
         stat_strings.append(format_string.format("Defense", "Ability", "Bonus"))
         stat_strings.append("-"*50)
         for stat, bonus in self.stats.iteritems():
-            stat_strings.append(format_string.format(str(bonus), stat, str(bonus - 10)))
+            stat_strings.append(format_string.format(str(bonus), stat.title(), str(bonus - 10)))
         stat_strings.append("")
         stat_strings.append(format_string.format(str(self.armor_defense),
                             "Armor", str(self.armor_defense - 10)))
