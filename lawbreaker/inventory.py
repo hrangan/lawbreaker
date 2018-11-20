@@ -13,7 +13,7 @@ class Inventory(object):
 
     @property
     def total_slots(self):
-        return self.character.stats['constitution'] + 10
+        return self.character.stats['constitution']
 
     @property
     def used_slots(self):
