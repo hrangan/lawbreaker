@@ -11,39 +11,28 @@
         <div class="container">
             <!-- Title -->
             <div class="row">
-                <div class="two columns">&nbsp;</div>
-                <div class="eight columns" style="font-family:'Sebaldus-Gotisch';font-size:3em;text-align:center;">Lawbreaker</div>
-                <div class="two columns">&nbsp;</div>
+                <div class="offset-by-two columns eight columns" style="font-family:'Sebaldus-Gotisch';font-size:3em;text-align:center;">Lawbreaker</div>
             </div>
             <div class="row">
-                <div class="two columns">&nbsp;</div>
-                <div class="eight columns" style="text-align:center;"><b>A character generator for the Knave role playing game.</b></div>
-                <div class="two columns">&nbsp;</div>
+                <div class="offset-by-two columns eight columns" style="text-align:center;"><b>A character generator for the Knave role playing game.</b></div>
             </div>
             <div class="row">
-                <div class="one columns">&nbsp;</div>
-                <div class="ten columns"><hr></div>
-                <div class="one columns">&nbsp;</div>
+                <div class="offset-by-one column ten columns"><hr></div>
             </div>
             <!-- Basic details -->
             <div class="row">
-                <div class="two columns">&nbsp;</div>
-                <div class="three columns"><b>Name:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{content['name']}}</div>
+                <div class="offset-by-two columns three columns"><b>Name:</b>&nbsp;&nbsp;&nbsp;&nbsp;{{content['name']}}</div>
                 <div class="one columns"><b>XP:&nbsp;&nbsp;&nbsp;&nbsp;</b>{{content['xp']}}</div>
                 <div class="two columns" style="text-align:center;"><b>Level:&nbsp;&nbsp;&nbsp;&nbsp;</b>{{content['level']}}</div>
                 <div class="two columns"><b>HP:&nbsp;&nbsp;&nbsp;&nbsp;</b> {{content['hit_points']}} / {{content['hit_points']}}</div>
-                <div class="two columns">&nbsp;</div>
             </div>
             <br>
             <!-- Traits -->
             <div class="row">
-                <div class="two columns">&nbsp;</div>
-                <div class="eight columns" style="font-family:'Sebaldus-Gotisch';font-size:1.9em;">Traits</div>
-                <div class="two columns">&nbsp;</div>
+                <div class="offset-by-two columns eight columns" style="font-family:'Sebaldus-Gotisch';font-size:1.9em;">Traits</div>
             </div>
             <div class="row">
-                <div class="two columns">&nbsp;</div>
-                <div class="eight columns">
+                <div class="offset-by-two columns eight columns">
                     {{content['traits']['background'].title()}}.
                     Wears {{content['traits']['clothing']}} clothes, and has {{content['traits']['speech']}} speech.
                     Has
@@ -55,56 +44,42 @@
                     Has been {{content['traits']['misfortune']}} in the past.
                     Favours {{content['traits']['alignment']}}.
                 </div>
-                <div class="two columns">&nbsp;</div>
             </div>
             <br>
             <!-- Attributes -->
             <div class="row">
-                <div class="two columns">&nbsp;</div>
-                <div class="eight columns" style="font-family:'Sebaldus-Gotisch';font-size:1.9em;">Attributes</div>
-                <div class="two columns">&nbsp;</div>
+                <div class="offset-by-two columns eight columns" style="font-family:'Sebaldus-Gotisch';font-size:1.9em;">Attributes</div>
             </div>
             <div class="row">
-                <div class="three columns">&nbsp;</div>
-                <div class="two columns" style="text-align:center;"><b>Defense</b></div>
+                <div class="offset-by-three columns two columns" style="text-align:center;"><b>Defense</b></div>
                 <div class="two columns" style="text-align:center;"><b>Attribute</b></div>
                 <div class="two columns" style="text-align:center;"><b>Bonus</b></div>
-                <div class="three columns">&nbsp;</div>
             </div>
             % for (attribute, attribute_defense) in content["attributes"].iteritems():
             <div class="row">
-                <div class="three columns">&nbsp;</div>
-                <div class="two columns" style="text-align:center;">{{attribute_defense}}</div>
+                <div class="offset-by-three columns two columns" style="text-align:center;">{{attribute_defense}}</div>
                 <div class="two columns" style="text-align:center;">{{attribute.title()}}</div>
                 <div class="two columns" style="text-align:center;">{{attribute_defense - 10}}</div>
-                <div class="three columns">&nbsp;</div>
             </div>
             % end
             <br>
             <div class="row">
-                <div class="three columns">&nbsp;</div>
-                <div class="two columns" style="text-align:center;">{{content['armor_defense']}}</div>
+                <div class="offset-by-three columns two columns" style="text-align:center;">{{content['armor_defense']}}</div>
                 <div class="two columns" style="text-align:center;">Armor</div>
                 <div class="two columns" style="text-align:center;">{{content['armor_defense'] - 10}}</div>
-                <div class="three columns">&nbsp;</div>
             </div>
             <br>
             <!-- Inventory -->
             <div class="row">
-                <div class="two columns">&nbsp;</div>
-                <div class="eight columns" style="font-family:'Sebaldus-Gotisch';font-size:1.9em;">Inventory</div>
-                <div class="two columns">&nbsp;</div>
+                <div class="offset-by-two columns eight columns" style="font-family:'Sebaldus-Gotisch';font-size:1.9em;">Inventory</div>
             </div>
             <div class="row">
-                <div class="three columns">&nbsp;</div>
-                <div class="five columns"><b>Name</b></div>
+                <div class="offset-by-three columns five columns"><b>Name</b></div>
                 <div class="one columns" style="text-align:center;"><b>Slots</b></div>
-                <div class="three columns">&nbsp;</div>
             </div>
             % for item in content["inventory"]:
             <div class="row">
-                <div class="two columns">&nbsp;</div>
-                <div class="six columns">
+                <div class="offset-by-two columns six columns">
                     % if item['equipped']:
                     (E)
                     % end
@@ -129,14 +104,10 @@
 
                 </div>
                 <div class="one columns" style="text-align:center;">{{item['slots']}}</div>
-                <div class="three columns">&nbsp;</div>
             </div>
             % end
             <div class="row">
-                <div class="two columns">&nbsp;</div>
-                <div class="six columns">&nbsp;</div>
-                <div class="one columns"><b>({{content['used_slots']}}/{{content['total_slots']}})</b></div>
-                <div class="three columns">&nbsp;</div>
+                <div class="offset-by-eight columns one columns"><b>({{content['used_slots']}}/{{content['total_slots']}})</b></div>
             </div>
             <!-- Footnote -->
             <br>
@@ -151,9 +122,8 @@
                     </i>
                 </div>
             </div>
-            <div class="row">
-                &nbsp;
-            </div>
+            <!-- Blank line for legibility -->
+            <div class="row">&nbsp;</div>
         </div>
     </body>
 </html>
