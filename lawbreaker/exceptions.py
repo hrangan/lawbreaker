@@ -12,3 +12,7 @@ class InvalidItemCategoryException(Exception):
 
 class InvalidItemAttribute(Exception):
     pass
+
+
+class NoResultsFound(Exception):
+    pass

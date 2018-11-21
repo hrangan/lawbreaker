@@ -1,4 +1,5 @@
 import json
+import uuid
 import random
 
 from collections import OrderedDict
@@ -12,6 +13,7 @@ from lawbreaker.traits import Traits
 class Character(object):
 
     def __init__(self, name="_"*20, level=1):
+        self.id = uuid.uuid4().hex
         self.name = name
         self.level = level
         self.xp = 1000 * (level - 1)
@@ -34,7 +36,8 @@ class Character(object):
                               str(self.traits)])
 
     def __repr__(self):
-        character = OrderedDict({'name': self.name,
+        character = OrderedDict({'id': self.id,
+                                 'name': self.name,
                                  'xp': self.xp,
                                  'level': self.level,
                                  'hit_points': self.hit_points,

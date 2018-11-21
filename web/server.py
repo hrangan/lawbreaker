@@ -8,12 +8,34 @@ from bottle import route, run, template, static_file
 
 from lawbreaker.character import Character
 from lawbreaker.names import Name
+from lawbreaker.database import Database
+from lawbreaker.exceptions import NoResultsFound
+
+
+db = Database()
 
 
 @route('/')
 def main():
     character = Character(name=Name.get())
-    return template('web/templates/index', content=json.loads(repr(character), object_pairs_hook=OrderedDict))
+    character_json = repr(character)
+    db.insert(character.id, character_json)
+
+    return template('web/templates/index', content=json.loads(character_json, object_pairs_hook=OrderedDict))
+
+
+@route('/favicon.ico')
+def favicon_fallback():
+    return
+
+
+@route('/<character_id>')
+def fetch_by_id(character_id):
+    try:
+        character_json = db.select(character_id)
+    except NoResultsFound:
+        return template('web/templates/error404')
+    return template('web/templates/index', content=json.loads(character_json, object_pairs_hook=OrderedDict))
 
 
 @route('/static/<path:path>')
