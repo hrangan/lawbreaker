@@ -19,14 +19,14 @@ class Database(object):
                                     timestamp timestamp)''')
 
     def select(self, character_id):
-        self.cursor.execute("SELECT character_json, timestamp FROM characters WHERE character_id=%s", (character_id,))
+        self.cursor.execute("SELECT character_json FROM characters WHERE character_id=%s", (character_id,))
         result = self.cursor.fetchone()
         if result is None:
             raise NoResultsFound
         else:
             self.cursor.execute("UPDATE characters SET timestamp=%s where character_id=%s",
                                 (datetime.utcnow(), character_id))
-            return result
+            return result[0]
 
     def insert(self, character_id, character_json):
         self.cursor.execute("""INSERT INTO characters(character_id, character_json, timestamp)

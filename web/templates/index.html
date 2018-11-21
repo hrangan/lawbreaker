@@ -16,14 +16,14 @@
             <div class="row">
                 <div class="offset-by-two columns eight columns" style="text-align:center;"><b>A character generator for the Knave role playing game.</b></div>
             </div>
-            % if not defined('expiry'):
+            % if not defined('permalinked'):
             <div class="row">
                 <div class="offset-by-two columns eight columns" style="text-align:center;font-size:0.9em;"><a href="{{content['id']}}">Permalink</a></div>
             </div>
             % end
-            % if defined('expiry'):
+            % if defined('permalinked') and permalinked:
             <div class="row">
-                <div class="offset-by-two columns eight columns" style="text-align:center;font-size:0.7em;">(Expires 30 days after last access, on {{expiry}})</div>
+                <div class="offset-by-two columns eight columns" style="text-align:center;font-size:0.8em;">(This permalink expires in 30 days since last use)</div>
             </div>
             % end
             <div class="row">

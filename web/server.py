@@ -32,13 +32,12 @@ def favicon_fallback():
 @route('/<character_id>')
 def fetch_by_id(character_id):
     try:
-        character_json, expiry = db.select(character_id)
+        character_json = db.select(character_id)
     except NoResultsFound:
         return template('web/templates/error404')
-    expiry_string = expiry.strftime('%B %d, %Y %I:%M %p')
     return template('web/templates/index',
                     content=json.loads(character_json, object_pairs_hook=OrderedDict),
-                    expiry=expiry_string)
+                    permalinked=True)
 
 
 @route('/static/<path:path>')
