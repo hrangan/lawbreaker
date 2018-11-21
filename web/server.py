@@ -26,7 +26,7 @@ def main():
 
 @route('/favicon.ico')
 def favicon_fallback():
-    return
+    return callback('/favicon.ico')
 
 
 @route('/<character_id>')
