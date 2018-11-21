@@ -18,6 +18,8 @@ class Database(object):
                                     character_json text,
                                     timestamp timestamp)''')
 
+        self.cursor.execute('''DELETE FROM characters WHERE timestamp < now() - interval '30 days' ''')
+
     def select(self, character_id):
         self.cursor.execute("SELECT character_json FROM characters WHERE character_id=%s", (character_id,))
         result = self.cursor.fetchone()
