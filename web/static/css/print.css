@@ -1,5 +1,11 @@
+/* CSS to hide automatic headers and footers when printing. This hides things
+ * like URL, date, etc.
+ */
 @page { size: auto;  margin: 0mm; }
 
+/* In normal (non print) rendering, this will hide elements that should only
+ * show up while printing
+ */
 .onlyprint {
   display : none !important;
 }
@@ -12,21 +18,25 @@
     margin-top:10%;
     margin-left: 10%;}
 
+  /* Class to suppress an element from printing. When not printing,
+   * this will be hidden by the media query and bypassed
+   */
   .noprint {
       display: none !important;
   }
 
+  /* Class for elements that should only show up when printed.
+   * This displays the element, and is picked when the media query
+   * detects a print
+   */
   .onlyprint {
     display : block !important;
   }
 
+  /* Make hyperlinks look like normal text */
   a {
     color: #222;
     text-decoration: none;
-  }
-
-  b {
-    font-weight: bold !important;
   }
 
   .container {
@@ -35,6 +45,7 @@
   .columns {
     margin-left: 0%; }
 
+  /* Only overriding settings that are being used*/
   .one.column,
   .one.columns                    {  width: 12.5%;  }
   .two.columns                    {  width: 25%;    }
@@ -42,15 +53,15 @@
   .five.columns                   {  width: 62.5%;  }
   .six.columns                    {  width: 68.75%; }
   .eight.columns                  {  width: 90%;    }
-  .ten.columns                    {  width: 90%;   }
-  .twelve.columns                 {  width: 90%;   }
+  .ten.columns                    {  width: 90%;    }
+  .twelve.columns                 {  width: 90%;    }
 
   .offset-by-one.column,
-  .offset-by-one.columns          {  margin-left: 0%; }
+  .offset-by-one.columns          {  margin-left: 0%;      }
   .offset-by-two.column,
-  .offset-by-two.columns          {  margin-left: 0%; }
+  .offset-by-two.columns          {  margin-left: 0%;      }
   .offset-by-three.column,
-  .offset-by-three.columns        {  margin-left: 6.25%; }
+  .offset-by-three.columns        {  margin-left: 6.25%;   }
   .offset-by-eight.column,
   .offset-by-eight.columns        {  margin-left: 71.875%; }
 }
