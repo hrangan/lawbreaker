@@ -19,11 +19,11 @@
             </div>
             % if not defined('permalinked'):
             <div class="row noprint">
-                <div class="offset-by-two eight columns" style="text-align:center;font-size:0.9em;"><a href="{{content['id']}}">Permalink</a></div>
+                <div class="offset-by-two eight columns" style="text-align:center;font-size:0.9em;"><a class="button" href="{{content['id']}}">Permalink</a></div>
             </div>
             % end
             % if defined('permalinked') and permalinked:
-            <div class="row noprint">
+            <div class="row noprint" style="margin:1%">
                 <div class="offset-by-two eight columns" style="text-align:center;font-size:0.8em;">(This permalink expires after 30 days of inactivity)</div>
             </div>
             % end
