@@ -1,0 +1,55 @@
+@page { size: auto;  margin: 0mm; }
+
+.onlyprint {
+  display : none !important;
+}
+
+
+@media print{
+
+  html {
+    font-size: 38%;
+    margin: 5%;}
+
+  .noprint {
+      display: none !important;
+  }
+
+  .onlyprint {
+    display : block !important;
+  }
+
+  a {
+    color: #222;
+    text-decoration: none;
+  }
+
+  b {
+    font-weight: bold !important;
+  }
+
+  .container {
+    width: 75%; }
+  .column,
+  .columns {
+    margin-left: 0%; }
+
+  .one.column,
+  .one.columns                    {  width: 12.5%;  }
+  .two.columns                    {  width: 25%;    }
+  .three.columns                  {  width: 37.5%;  }
+  .five.columns                   {  width: 62.5%;  }
+  .six.columns                    {  width: 68.75%; }
+  .eight.columns                  {  width: 90%;    }
+  .ten.columns                    {  width: 90%;   }
+  .twelve.columns                 {  width: 90%;   }
+
+  .offset-by-one.column,
+  .offset-by-one.columns          {  margin-left: 0%; }
+  .offset-by-two.column,
+  .offset-by-two.columns          {  margin-left: 0%; }
+  .offset-by-three.column,
+  .offset-by-three.columns        {  margin-left: 6.25%; }
+  .offset-by-eight.column,
+  .offset-by-eight.columns        {  margin-left: 71.875%; }
+}
