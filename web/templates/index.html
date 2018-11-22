@@ -11,10 +11,10 @@
     <body style="font-family: 'Crimson Text', serif !important;font-size:1.8em;">
         <div class="container">
             <!-- Title -->
-            <div class="row" style="display:flex;align-items:center;">
+            <div class="row noprint" style="display:flex;align-items:center;">
                 <div class="offset-by-two eight columns" style="font-family:'Sebaldus-Gotisch';font-size:3em;text-align:center;">Lawbreaker</div>
             </div>
-            <div class="row">
+            <div class="row noprint">
                 <div class="offset-by-two eight columns" style="text-align:center;"><b>A character generator for the Knave role playing game.</b></div>
             </div>
             % if not defined('permalinked'):
@@ -28,8 +28,9 @@
             </div>
             % end
             <div class="row">
-                <div class="offset-by-one column ten columns"><hr></div>
+                <div class="offset-by-one ten columns noprint"><hr></div>
             </div>
+
             <!-- Basic details -->
             <div class="row">
                 <div class="offset-by-two one columns"><b>Name:</b></div>
@@ -39,6 +40,7 @@
                 <div class="two columns" ><b>HP:&nbsp;&nbsp;</b> {{content['hit_points']}} / {{content['hit_points']}}</div>
             </div>
             <br>
+
             <!-- Traits -->
             <div class="row">
                 <div class="offset-by-two eight columns" style="font-family:'Sebaldus-Gotisch';font-size:1.9em;">Traits</div>
@@ -123,6 +125,16 @@
             </div>
             <!-- Footnote -->
             <br>
+            <div class="row onlyprint" style="display:flex;align-items:center;">
+                <div class="offset-by-two eight columns" style="font-family:'Sebaldus-Gotisch';font-size:3em;text-align:center;">Lawbreaker</div>
+            </div>
+            <div class="row onlyprint">
+                <div class="offset-by-two eight columns" style="text-align:center;"><b>A character generator for the Knave role playing game.</b></div>
+            </div>
+            <div class="row onlyprint">
+                <div class="offset-by-two eight columns" style="text-align:center;">lawbreaker.herokuapp.com</div>
+            </div>
+            <br class="onlyprint">
             <div class="row">
                 <div class="twelve columns" style="text-align:center;">
                     <i style="font-size:0.7em;">

@@ -9,7 +9,8 @@
 
   html {
     font-size: 38%;
-    margin: 5%;}
+    margin-top:10%;
+    margin-left: 10%;}
 
   .noprint {
       display: none !important;
