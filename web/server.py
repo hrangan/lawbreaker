@@ -29,11 +29,6 @@ def favicon_fallback():
     return callback('/favicon.ico')
 
 
-@route('/migrate')
-def migrate():
-    db.migrate()
-
-
 @route('/<character_id>')
 def fetch_by_id(character_id):
     try:

@@ -18,7 +18,7 @@ class Database(object):
                                     character_json text,
                                     expiry timestamp)''')
 
-        # self.cursor.execute('''DELETE FROM characters WHERE expiry < now()''')
+        self.cursor.execute('''DELETE FROM characters WHERE expiry < now()''')
 
     def select(self, character_id):
         self.cursor.execute("SELECT character_json FROM characters WHERE character_id=%s", (character_id,))
@@ -34,8 +34,3 @@ class Database(object):
         self.cursor.execute("""INSERT INTO characters(character_id, character_json, expiry)
                                VALUES (%s, %s, %s)""",
                             (character_id, character_json, datetime.utcnow()+timedelta(days=2)))
-
-    def migrate(self):
-        self.cursor.execute("alter table characters add column expiry timestamp")
-        self.cursor.execute("update characters set expiry=now() + interval '30 days' where expiry is null")
-        self.cursor.execute("alter table characters drop column timestamp")
