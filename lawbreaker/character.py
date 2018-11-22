@@ -5,7 +5,8 @@ import random
 from collections import OrderedDict
 
 from lawbreaker.dice import dice
-from lawbreaker.inventory import Inventory, InventoryFullException
+from lawbreaker.inventory import Inventory
+from lawbreaker.exceptions import InventoryFullException
 from lawbreaker.items import Items, Food, Gear
 from lawbreaker.traits import Traits
 
