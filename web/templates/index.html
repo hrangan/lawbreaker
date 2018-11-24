@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Lawbreaker: A Knave character generator</title>
+        % if not defined('permalinked'):
+            <title>Lawbreaker: A Knave character generator</title>
+        % end
+        % if defined('permalinked') and permalinked:
+            <title>Lawbreaker: {{content['name']}}</title>
+        % end
         <link rel="stylesheet" type="text/css" href="static/css/normalize.css" />
         <link rel="stylesheet" type="text/css" href="static/css/skeleton.css" />
 
