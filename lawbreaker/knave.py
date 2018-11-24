@@ -4,7 +4,8 @@ import argparse
 from character import Character
 from names import Name
 
-if __name__ == "__main__":
+
+def main():
     parser = argparse.ArgumentParser(description="Process some integers.")
     parser.add_argument("--level", dest="level", action="store", type=int, default=1)
 
@@ -15,3 +16,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     char = Character(name=args.randomName and Name.get() or " ".join(args.name), level=args.level)
     print char
+
+
+if __name__ == "__main__":
+    main()
