@@ -6,7 +6,7 @@ from exceptions import InvalidItemCategoryException, InvalidItemAttribute
 
 
 class BaseItem(object):
-    type = None
+    type = ''
 
     def __init__(self, item_name, slots=1):
         self.details = OrderedDict({'name':  item_name,
