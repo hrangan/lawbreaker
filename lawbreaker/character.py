@@ -37,17 +37,18 @@ class Character(object):
                               str(self.traits)])
 
     def __repr__(self):
-        character = OrderedDict({'id': self.id,
-                                 'name': self.name,
-                                 'xp': self.xp,
-                                 'level': self.level,
-                                 'hit_points': self.hit_points,
-                                 'attributes': self.stats,
-                                 'armor_defense': self.inventory.armor_defense,
-                                 'inventory': [item.details for item in self.inventory.sorted()],
-                                 'used_slots': self.inventory.used_slots,
-                                 'total_slots': self.inventory.total_slots,
-                                 'traits': self.traits.traits})
+        character = OrderedDict([('id', self.id),
+                                 ('name', self.name),
+                                 ('xp', self.xp),
+                                 ('level', self.level),
+                                 ('hit_points', self.hit_points),
+                                 ('attributes', self.stats),
+                                 ('armor_defense', self.inventory.armor_defense),
+                                 ('inventory', [item.details for item in self.inventory.sorted()]),
+                                 ('used_slots', self.inventory.used_slots),
+                                 ('total_slots', self.inventory.total_slots),
+                                 ('traits', self.traits.traits)]
+                                )
 
         return json.dumps(character)
 
@@ -79,13 +80,13 @@ class Character(object):
         return "\n".join(stat_strings)
 
     def create_stats(self):
-        stats = OrderedDict()
-        stats["strength"] = 10 + min(dice._3d6())
-        stats["dexterity"] = 10 + min(dice._3d6())
-        stats["constitution"] = 10 + min(dice._3d6())
-        stats["intelligence"] = 10 + min(dice._3d6())
-        stats["wisdom"] = 10 + min(dice._3d6())
-        stats["charisma"] = 10 + min(dice._3d6())
+        stats = OrderedDict([("strength", 10 + min(dice._3d6())),
+                             ("dexterity", 10 + min(dice._3d6())),
+                             ("constitution", 10 + min(dice._3d6())),
+                             ("intelligence", 10 + min(dice._3d6())),
+                             ("wisdom", 10 + min(dice._3d6())),
+                             ("charisma", 10 + min(dice._3d6()))]
+                            )
 
         return stats
 

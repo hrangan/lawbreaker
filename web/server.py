@@ -4,7 +4,7 @@ import sys
 import json
 
 from collections import OrderedDict
-from bottle import route, run, template, static_file
+from bottle import route, run, template, static_file, request, response
 
 from lawbreaker.character import Character
 from lawbreaker.names import Name
@@ -20,7 +20,8 @@ def main():
     character = Character(name=Name.get())
     character_json = repr(character)
     db.insert(character.id, character_json)
-
+    if 'application/json' in request.headers.get('Accept', ''):
+        return character_json
     return template('web/templates/index', content=json.loads(character_json, object_pairs_hook=OrderedDict))
 
 
@@ -34,10 +35,14 @@ def fetch_by_id(character_id):
     try:
         character_json = db.select(character_id)
     except NoResultsFound:
-        return template('web/templates/error404')
-    return template('web/templates/index',
-                    content=json.loads(character_json, object_pairs_hook=OrderedDict),
-                    permalinked=True)
+        response.status = 404
+        return None if ('application/json' in request.headers.get('Accept', '')) \
+            else template('web/templates/error404')
+
+    return character_json if ('application/json' in request.headers.get('Accept', '')) \
+        else template('web/templates/index',
+                      content=json.loads(character_json, object_pairs_hook=OrderedDict),
+                      permalinked=True)
 
 
 @route('/static/<path:path>')

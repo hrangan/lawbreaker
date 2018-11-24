@@ -1,4 +1,5 @@
 import random
+from collections import OrderedDict
 
 
 class Traits(object):
@@ -39,17 +40,19 @@ class Traits(object):
                  "Chaos", "Chaos", "Chaos", "Chaos", "Chaos"]
 
     def __init__(self):
-        self.traits = {"physique": random.choice(Traits.physique).lower(),
-                       "face": random.choice(Traits.face).lower(),
-                       "skin": random.choice(Traits.skin).lower(),
-                       "hair": random.choice(Traits.hair).lower(),
-                       "clothing": random.choice(Traits.clothing).lower(),
-                       "virtue": random.choice(Traits.virtues).lower(),
-                       "vice": random.choice(Traits.vices).lower(),
-                       "speech": random.choice(Traits.speech).lower(),
-                       "background": random.choice(Traits.background),
-                       "misfortune": random.choice(Traits.misfortunes).lower(),
-                       "alignment": random.choice(Traits.alignment).lower()}
+        self.traits = OrderedDict([("physique", random.choice(Traits.physique).lower()),
+                                   ("face", random.choice(Traits.face).lower()),
+                                   ("skin", random.choice(Traits.skin).lower()),
+                                   ("hair", random.choice(Traits.hair).lower()),
+                                   ("clothing", random.choice(Traits.clothing).lower()),
+                                   ("virtue", random.choice(Traits.virtues).lower()),
+                                   ("vice", random.choice(Traits.vices).lower()),
+                                   ("speech", random.choice(Traits.speech).lower()),
+                                   ("background", random.choice(Traits.background)),
+                                   ("misfortune", random.choice(Traits.misfortunes).lower()),
+                                   ("alignment", random.choice(Traits.alignment).lower())
+                                   ]
+                                  )
 
     def __str__(self):
 
