@@ -7,7 +7,8 @@ from names import Name
 
 def main():
     parser = argparse.ArgumentParser(description="Process some integers.")
-    parser.add_argument("--level", dest="level", action="store", type=int, default=1)
+    parser.add_argument("--level", dest="level", action="store", type=int, default=1,
+                        choices=range(1, 11))
 
     group = parser.add_mutually_exclusive_group()
     group.add_argument('--random-name', action='store_const', dest='randomName', const=True)
