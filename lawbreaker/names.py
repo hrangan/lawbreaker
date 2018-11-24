@@ -325,8 +325,3 @@ surnames = ["Bright", "Brown", "Browne", "Brushfire", "Camp", "Campman", "Canyon
             "Mosstree", "Greentree", "Oaks", "Oakes", "Pine", "Pines", "Pyne", "Pynes", "Sawyer",
             "Silver", "Silvermoon", "Singer", "Springs", "Springer", "Strider", "Stryder", "Tanner", "Tannerman",
             "Thick", "Thicke", "Walker", "Woods", "Wood", "Woode", "Wooden", "Woodyn"]
-
-
-if __name__ == '__main__':
-    for x in range(10):
-        print Name.get()

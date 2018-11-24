@@ -20,9 +20,8 @@ def main():
     character = Character(name=Name.get())
     character_json = repr(character)
     db.insert(character.id, character_json)
-    if 'application/json' in request.headers.get('Accept', ''):
-        return character_json
-    return template('web/templates/index', content=json.loads(character_json, object_pairs_hook=OrderedDict))
+    return character_json if 'application/json' in request.headers.get('Accept', '') \
+        else template('web/templates/index', content=json.loads(character_json, object_pairs_hook=OrderedDict))
 
 
 @route('/favicon.ico')

@@ -13,10 +13,9 @@ class Database(object):
         conn.set_session(autocommit=True)
         self.cursor = conn.cursor()
 
-        self.cursor.execute('''CREATE TABLE IF NOT EXISTS characters
-                                   (character_id text PRIMARY KEY UNIQUE,
-                                    character_json text,
-                                    expiry timestamp)''')
+        self.cursor.execute('''CREATE TABLE IF NOT EXISTS characters (character_id text PRIMARY KEY UNIQUE,
+                                                                      character_json text,
+                                                                      expiry timestamp)''')
 
         self.cursor.execute('''DELETE FROM characters WHERE expiry < now()''')
 
@@ -31,6 +30,5 @@ class Database(object):
             return result[0]
 
     def insert(self, character_id, character_json):
-        self.cursor.execute("""INSERT INTO characters(character_id, character_json, expiry)
-                               VALUES (%s, %s, %s)""",
+        self.cursor.execute("""INSERT INTO characters(character_id, character_json, expiry) VALUES (%s, %s, %s)""",
                             (character_id, character_json, datetime.utcnow()+timedelta(days=2)))

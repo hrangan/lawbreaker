@@ -16,9 +16,5 @@ class Dice(object):
 
         return dice
 
-    def _1d1(self):
-        assert self.__getattr__('_1d1') == [1]
-        return self.__getattr__('_1d1')
-
 
 dice = Dice()
