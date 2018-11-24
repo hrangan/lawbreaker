@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        % if not defined('permalinked'):
+        % if (not defined('permalink')) or (defined('permalink') and not permalink):
             <title>Lawbreaker: A Knave character generator</title>
         % end
-        % if defined('permalinked') and permalinked:
+        % if defined('permalink') and permalink:
             <title>Lawbreaker: {{content['name']}}</title>
         % end
         <link rel="stylesheet" type="text/css" href="static/css/normalize.css" />
@@ -24,12 +24,12 @@
             <div class="row noprint">
                 <div class="offset-by-two eight columns" style="text-align:center;"><b>A character generator for the Knave role playing game.</b></div>
             </div>
-            % if not defined('permalinked'):
+            % if (not defined('permalink')) or (defined('permalink') and not permalink):
             <div class="row noprint">
                 <div class="offset-by-two eight columns" style="text-align:center;font-size:0.9em;"><a class="button" href="{{content['id']}}">Permalink</a></div>
             </div>
             % end
-            % if defined('permalinked') and permalinked:
+            % if defined('permalink') and permalink:
             <div class="row noprint" style="margin:1%">
                 <div class="offset-by-two eight columns" style="text-align:center;font-size:0.8em;">(This permalink expires after 30 days of inactivity)</div>
             </div>

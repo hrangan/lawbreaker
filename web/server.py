@@ -41,7 +41,7 @@ def fetch_by_id(character_id):
     return character_json if ('application/json' in request.headers.get('Accept', '')) \
         else template('web/templates/index',
                       content=json.loads(character_json, object_pairs_hook=OrderedDict),
-                      permalinked=True)
+                      permalink=True)
 
 
 @route('/static/<path:path>')
