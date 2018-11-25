@@ -27,16 +27,16 @@
             </div>
             % if (not defined('permalink')) or (defined('permalink') and not permalink):
             <div class="row noprint">
-                <div class="offset-by-two eight columns" style="text-align:center;font-size:0.9em;"><a class="button" href="{{content['id']}}">Permalink</a></div>
+                <div class="offset-by-two eight columns" style="text-align:center;font-size:0.9em;margin-top:1%;margin-bottom:0.5%"><a class="button" href="{{content['id']}}">Permalink</a></div>
             </div>
             % end
             % if defined('permalink') and permalink:
-            <div class="row noprint" style="margin:1%">
+            <div class="row noprint" style="margin-top:1%;margin-bottom:3%;">
                 <div class="offset-by-two eight columns" style="text-align:center;font-size:0.8em;">(This permalink expires after 30 days of inactivity)</div>
             </div>
             % end
             <div class="row">
-                <div class="offset-by-one ten columns noprint"><hr></div>
+                <div class="offset-by-one ten columns noprint" style="margin-top:-3%;"><hr></div>
             </div>
 
             <!-- Basic details -->
