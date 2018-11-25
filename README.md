@@ -38,7 +38,8 @@ Web
 Command line
 ---
 ```bash
-usage: knave [-h] [--level LEVEL] [--random-name | name [name ...]]
+usage: knave [-h] [--level {1,2,3,4,5,6,7,8,9,10}] [--random-name]
+             [name [name ...]]
 
 Process some integers.
 
@@ -46,8 +47,8 @@ positional arguments:
   name
 
 optional arguments:
-  -h, --help     show this help message and exit
-  --level LEVEL
+  -h, --help            show this help message and exit
+  --level {1,2,3,4,5,6,7,8,9,10}
   --random-name
 ```
 ```
