@@ -4,7 +4,7 @@ import sys
 import json
 
 from collections import OrderedDict
-from bottle import route, run, template, static_file, request, response
+from bottle import route, run, template, static_file, request, response, redirect, hook
 
 from lawbreaker.character import Character
 from lawbreaker.names import Name
@@ -13,6 +13,15 @@ from lawbreaker.exceptions import NoResultsFound
 
 
 db = Database()
+
+
+if os.environ.get('APP_LOCATION') == 'heroku':
+    # This doesn't work locally since there is no SSL certificate
+    @hook('before_request')
+    def ssl_redirect():
+        """Redirect incoming http requests to https"""
+        if request.get_header('X-Forwarded-Proto', 'http') != 'https':
+            redirect(request.url.replace('http://', 'https://', 1), code=302)
 
 
 @route('/')
