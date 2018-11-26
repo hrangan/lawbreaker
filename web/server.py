@@ -24,7 +24,8 @@ def main():
         response.content_type = 'application/json'
         return character_json
     else:
-        return template('web/templates/index', content=json.loads(character_json, object_pairs_hook=OrderedDict))
+        return template('web/templates/index',
+                        content=json.loads(character_json, object_pairs_hook=OrderedDict))
 
 
 @route('/favicon.ico')
@@ -62,4 +63,4 @@ if __name__ == '__main__':
     if os.environ.get('APP_LOCATION') == 'heroku':
         run(server="waitress", host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
     else:
-        run(server="waitress", host='localhost', port=8080, reloader=True, debug=True)
+        run(server="waitress", host='localhost', port=5000, reloader=True, debug=True)
