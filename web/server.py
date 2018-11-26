@@ -22,7 +22,7 @@ if os.environ.get('APP_LOCATION') == 'heroku':
     def ssl_redirect():
         """Redirect incoming http requests to https"""
         if request.get_header('X-Forwarded-Proto', 'http') != 'https':
-            redirect(request.url.replace('http://', 'https://', 1), code=302)
+            redirect(request.url.replace('http://', 'https://', 1), code=301)
 
 
 @route('/')
