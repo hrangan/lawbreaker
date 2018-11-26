@@ -13,6 +13,7 @@ from lawbreaker.exceptions import NoResultsFound
 
 
 db = Database()
+static_root = os.path.abspath(os.path.split(sys.argv[0])[0]) + '/static'
 
 
 if os.environ.get('APP_LOCATION') == 'heroku':
@@ -35,11 +36,6 @@ def main():
     else:
         return template('web/templates/index',
                         content=json.loads(character_json, object_pairs_hook=OrderedDict))
-
-
-@route('/favicon.ico')
-def favicon_fallback():
-    return callback('/favicon.ico')
 
 
 @route('/<character_id>')
@@ -65,7 +61,12 @@ def fetch_by_id(character_id):
 
 @route('/static/<path:path>')
 def callback(path):
-    return static_file(path, root=os.path.abspath(os.path.split(sys.argv[0])[0])+'/static')
+    return static_file(path, root=static_root)
+
+
+@route('/favicon.ico')
+def favicon_fallback():
+    return callback('/favicon.ico')
 
 
 if __name__ == '__main__':
