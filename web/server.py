@@ -30,12 +30,8 @@ def main():
     character = Character(name=Name.get())
     character_json = repr(character)
     db.insert(character.id, character_json)
-    if 'application/json' in request.headers.get('Accept'):
-        response.content_type = 'application/json'
-        return character_json
-    else:
-        return template('web/templates/index',
-                        content=json.loads(character_json, object_pairs_hook=OrderedDict))
+    return template('web/templates/index',
+                    content=json.loads(character_json, object_pairs_hook=OrderedDict))
 
 
 @route('/<character_id>')
@@ -44,19 +40,11 @@ def fetch_by_id(character_id):
         character_json = db.select(character_id)
     except NoResultsFound:
         response.status = 404
-        if 'application/json' in request.headers.get('Accept'):
-            response.content_type = 'application/json'
-            return None
-        else:
-            return template('web/templates/error404')
+        return template('web/templates/error404')
 
-    if 'application/json' in request.headers.get('Accept'):
-        response.content_type = 'application/json'
-        return character_json
-    else:
-        return template('web/templates/index',
-                        content=json.loads(character_json, object_pairs_hook=OrderedDict),
-                        permalink=True)
+    return template('web/templates/index',
+                    content=json.loads(character_json, object_pairs_hook=OrderedDict),
+                    permalink=True)
 
 
 @route('/static/<path:path>')
