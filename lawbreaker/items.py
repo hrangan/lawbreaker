@@ -75,7 +75,7 @@ class Items(object):
                ("Sword", 2, 'd8', 1, 3),
                ("Axe", 2, 'd8', 1, 3),
                ("Flail", 2, 'd8', 1, 3),
-               ("Mace", 2, 'd10', 1, 3),
+               ("Mace", 2, 'd8', 1, 3),
                ("Halberd", 3, 'd10', 2, 3),
                ("War Hammer", 3, 'd10', 2, 3),
                ("Long Sword", 3, 'd10', 2, 3),
@@ -105,7 +105,7 @@ class Items(object):
               ["Brigandine", 2, 2, 4],
               ["Brigandine", 2, 2, 4],
               ["Brigandine", 2, 2, 4],
-              ["Chain", 3, 4, 5]]
+              ["Chain", 3, 3, 5]]
              ]
 
     # (Armor name, +defense, slots)
@@ -139,7 +139,7 @@ class Items(object):
                      "Chalk, 10",
                      "Crowbar",
                      "Tinderbox",
-                     "Grap. hook",
+                     "Grappling hook",
                      "Hammer",
                      "Waterskin",
                      "Lantern",
@@ -165,7 +165,7 @@ class Items(object):
                        "Caltrops",
                        "Chisel",
                        "Drill",
-                       "Fish. rod",
+                       "Fishing rod",
                        "Marbles",
                        "Glue",
                        "Pick",
