@@ -21,7 +21,7 @@ class Character(object):
         self.inventory = Inventory(self)
 
         self.stats = self.create_stats()
-        self.hit_points = dice._1d8()[0]
+        self.hit_points = dice.roll('1d8')[0]
 
         self.create_stats()
         self.basic_loadout()
@@ -80,12 +80,12 @@ class Character(object):
         return "\n".join(stat_strings)
 
     def create_stats(self):
-        stats = OrderedDict([("strength", 10 + min(dice._3d6())),
-                             ("dexterity", 10 + min(dice._3d6())),
-                             ("constitution", 10 + min(dice._3d6())),
-                             ("intelligence", 10 + min(dice._3d6())),
-                             ("wisdom", 10 + min(dice._3d6())),
-                             ("charisma", 10 + min(dice._3d6()))]
+        stats = OrderedDict([("strength", 10 + min(dice.roll('3d6'))),
+                             ("dexterity", 10 + min(dice.roll('3d6'))),
+                             ("constitution", 10 + min(dice.roll('3d6'))),
+                             ("intelligence", 10 + min(dice.roll('3d6'))),
+                             ("wisdom", 10 + min(dice.roll('3d6'))),
+                             ("charisma", 10 + min(dice.roll('3d6')))]
                             )
 
         return stats
@@ -128,11 +128,11 @@ class Character(object):
         stats = self.stats.keys()
         while count > 0:
             for stat in random.sample(stats, len(stats)):
-                if (self.stats[stat] < 20) and (dice._1d20()[0] < (self.stats[stat])):
+                if (self.stats[stat] < 20) and (dice.roll('1d20')[0] < (self.stats[stat])):
                     self.stats[stat] += 1
                     count -= 1
                     break
-        hp = sum([dice._1d8()[0] for x in range(iteration)])
+        hp = sum([dice.roll('1d8')[0] for x in range(iteration)])
         if hp < self.hit_points:
             self.hit_points += 1
         else:
