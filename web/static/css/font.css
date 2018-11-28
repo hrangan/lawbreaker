@@ -1,6 +1,6 @@
 @font-face {
-font-family: 'Sebaldus-Gotisch';
-font-style: normal;
-font-weight: normal;
-src: local('Sebaldus-Gotisch'), url('Sebaldus-Gotisch.woff') format('woff');
+  font-family: 'Sebaldus-Gotisch';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Sebaldus-Gotisch'), url('Sebaldus-Gotisch.woff') format('woff');
 }
