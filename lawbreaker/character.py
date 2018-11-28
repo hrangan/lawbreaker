@@ -37,18 +37,17 @@ class Character(object):
                               str(self.traits)])
 
     def __repr__(self):
-        character = OrderedDict([('id', self.id),
-                                 ('name', self.name),
-                                 ('xp', self.xp),
-                                 ('level', self.level),
-                                 ('hit_points', self.hit_points),
-                                 ('attributes', self.stats),
-                                 ('armor_defense', self.inventory.armor_defense),
-                                 ('inventory', [item.details for item in self.inventory.sorted()]),
-                                 ('used_slots', self.inventory.used_slots),
-                                 ('total_slots', self.inventory.total_slots),
-                                 ('traits', self.traits.traits)]
-                                )
+        character = {'id': self.id,
+                     'name': self.name,
+                     'xp': self.xp,
+                     'level': self.level,
+                     'hit_points': self.hit_points,
+                     'attributes': self.stats,
+                     'armor_defense': self.inventory.armor_defense,
+                     'inventory': [item.details for item in self.inventory.sorted()],
+                     'used_slots': self.inventory.used_slots,
+                     'total_slots': self.inventory.total_slots,
+                     'traits': self.traits.traits}
 
         return json.dumps(character)
 

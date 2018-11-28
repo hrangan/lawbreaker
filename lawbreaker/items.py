@@ -1,7 +1,5 @@
 import random
 
-from collections import OrderedDict
-
 from exceptions import InvalidItemCategoryException, InvalidItemAttribute
 
 
@@ -9,10 +7,10 @@ class BaseItem(object):
     type = ''
 
     def __init__(self, item_name, slots=1):
-        self.details = OrderedDict({'name':  item_name,
-                                    'type':  self.__class__.type,
-                                    'slots':  slots,
-                                    'equipped': False})
+        self.details = {'name':  item_name,
+                        'type':  self.__class__.type,
+                        'slots':  slots,
+                        'equipped': False}
 
     def equip(self):
         self.details['equipped'] = True
