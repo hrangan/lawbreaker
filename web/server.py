@@ -26,7 +26,7 @@ if os.environ.get('APP_LOCATION') == 'heroku':
 
 
 @route('/')
-def main():
+def generate_random():
     character = Character(name=Name.get())
     character_json = repr(character)
     db.insert(character.id, character_json)
@@ -48,13 +48,13 @@ def fetch_by_id(character_id):
 
 
 @route('/static/<path:path>')
-def callback(path):
+def static_files(path):
     return static_file(path, root=static_root)
 
 
 @route('/favicon.ico')
-def favicon_fallback():
-    return callback('/favicon.ico')
+def favicon():
+    return static_file('/favicon.ico', root=static_root)
 
 
 if __name__ == '__main__':
