@@ -14,7 +14,7 @@
         <meta property="og:url" content="https://lawbreaker.herokuapp.com/{{content['id']}}" />
         % end
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://lawbreaker.herokuapp.com/static/thumbnail.png" />
+        <meta property="og:image" content="https://lawbreaker.herokuapp.com/static/images/thumbnail.png" />
         <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="370" />
         <meta property="og:image:height" content="370" />
@@ -27,33 +27,42 @@
         <link rel="preload" href="/static/css/Sebaldus-Gotisch.woff" as="font">
         <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet">
     </head>
-    <body style="font-family: 'Crimson Text', serif !important;font-size:1.8em;">
+    <body style="font-family: 'Crimson Text', serif !important;font-size:1.8em;margin-top:10px;">
         <div class="container">
             <!-- Header -->
             <div class="row noprint" style="display:flex;align-items:center;">
-                <div class="offset-by-two eight columns" style="font-family:'Sebaldus-Gotisch';font-size:3em;text-align:center;">
-                    Lawbreaker
+                <div class="offset-by-two two columns">
+                    <img alt="Konrad I Mazowiecki"
+                         src="static/images/Konrad_I_Mazowiecki.jpg"
+                         style="max-width:150%;max-height:150%;">
+                </div>
+                <div class="six columns">
+                    <div class="rownoprint" style="display:flex;align-items:center;">
+                        <div class="twelve columns" style="font-family:'Sebaldus-Gotisch';font-size:3em;text-align:center;">
+                            Lawbreaker
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="twelve columns" style="text-align:center;">
+                            <b>A character generator for the Knave role playing game.</b>
+                        </div>
+                    </div>
+                    % if (not defined('permalink')) or (defined('permalink') and not permalink):
+                    <div class="row">
+                        <div class="twelve columns" style="text-align:center;font-size:0.9em;margin-top:1%;margin-bottom:0.5%">
+                            <a class="button" href="{{content['id']}}">Permalink</a>
+                        </div>
+                    </div>
+                    % end
+                    % if defined('permalink') and permalink:
+                    <div class="row" style="margin-top:1%;margin-bottom:3%;">
+                        <div class="twelve columns" style="text-align:center;font-size:0.8em;">
+                            (This permalink expires after 30 days of inactivity)
+                        </div>
+                    </div>
+                    % end
                 </div>
             </div>
-            <div class="row noprint">
-                <div class="offset-by-two eight columns" style="text-align:center;">
-                    <b>A character generator for the Knave role playing game.</b>
-                </div>
-            </div>
-            % if (not defined('permalink')) or (defined('permalink') and not permalink):
-            <div class="row noprint">
-                <div class="offset-by-two eight columns" style="text-align:center;font-size:0.9em;margin-top:1%;margin-bottom:0.5%">
-                    <a class="button" href="{{content['id']}}">Permalink</a>
-                </div>
-            </div>
-            % end
-            % if defined('permalink') and permalink:
-            <div class="row noprint" style="margin-top:1%;margin-bottom:3%;">
-                <div class="offset-by-two eight columns" style="text-align:center;font-size:0.8em;">
-                    (This permalink expires after 30 days of inactivity)
-                </div>
-            </div>
-            % end
             <div class="row">
                 <div class="offset-by-one ten columns noprint" style="margin-top:-3%;"><hr></div>
             </div>
@@ -167,11 +176,11 @@
             <div class="row">
                 <div class="twelve columns" style="text-align:center;">
                     <span style="font-size:0.7em;">
-                    <a target="github" href="https://github.com/hrangan/lawbreaker">Lawbreaker</a> by hrangan
+                    <a href="https://github.com/hrangan/lawbreaker" target="github">Lawbreaker</a> by hrangan
                     ·
-                    <a target="knave" href="https://www.drivethrurpg.com/product/250888/Knave">Knave</a> by Questing Beast
+                    <a href="https://www.drivethrurpg.com/product/250888/Knave" target="knave">Knave</a> by Questing Beast
                     ·
-                    <a target="orkishblade" href="https://www.reddit.com/r/DnDBehindTheScreen/comments/50pcg1/a_post_about_names_names_for_speakers_of_the/">Random names</a> courtesy OrkishBlade
+                    <a href="https://www.reddit.com/r/DnDBehindTheScreen/comments/50pcg1/a_post_about_names_names_for_speakers_of_the/" target="orkishblade">Random names</a> courtesy OrkishBlade
                     </span>
                 </div>
             </div>
