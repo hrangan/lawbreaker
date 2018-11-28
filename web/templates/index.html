@@ -29,21 +29,29 @@
     </head>
     <body style="font-family: 'Crimson Text', serif !important;font-size:1.8em;">
         <div class="container">
-            <!-- Title -->
+            <!-- Header -->
             <div class="row noprint" style="display:flex;align-items:center;">
-                <div class="offset-by-two eight columns" style="font-family:'Sebaldus-Gotisch';font-size:3em;text-align:center;">Lawbreaker</div>
+                <div class="offset-by-two eight columns" style="font-family:'Sebaldus-Gotisch';font-size:3em;text-align:center;">
+                    Lawbreaker
+                </div>
             </div>
             <div class="row noprint">
-                <div class="offset-by-two eight columns" style="text-align:center;"><b>A character generator for the Knave role playing game.</b></div>
+                <div class="offset-by-two eight columns" style="text-align:center;">
+                    <b>A character generator for the Knave role playing game.</b>
+                </div>
             </div>
             % if (not defined('permalink')) or (defined('permalink') and not permalink):
             <div class="row noprint">
-                <div class="offset-by-two eight columns" style="text-align:center;font-size:0.9em;margin-top:1%;margin-bottom:0.5%"><a class="button" href="{{content['id']}}">Permalink</a></div>
+                <div class="offset-by-two eight columns" style="text-align:center;font-size:0.9em;margin-top:1%;margin-bottom:0.5%">
+                    <a class="button" href="{{content['id']}}">Permalink</a>
+                </div>
             </div>
             % end
             % if defined('permalink') and permalink:
             <div class="row noprint" style="margin-top:1%;margin-bottom:3%;">
-                <div class="offset-by-two eight columns" style="text-align:center;font-size:0.8em;">(This permalink expires after 30 days of inactivity)</div>
+                <div class="offset-by-two eight columns" style="text-align:center;font-size:0.8em;">
+                    (This permalink expires after 30 days of inactivity)
+                </div>
             </div>
             % end
             <div class="row">
@@ -79,6 +87,7 @@
                 </div>
             </div>
             <br>
+
             <!-- Attributes -->
             <div class="row">
                 <div class="offset-by-two eight columns" style="font-family:'Sebaldus-Gotisch';font-size:1.9em;">Attributes</div>
@@ -102,6 +111,7 @@
                 <div class="two columns" style="text-align:center;">{{content['armor_defense'] - 10}}</div>
             </div>
             <br>
+
             <!-- Inventory -->
             <div class="row">
                 <div class="offset-by-two eight columns" style="font-family:'Sebaldus-Gotisch';font-size:1.9em;">Inventory</div>
@@ -117,24 +127,23 @@
                     (E)
                     % end
                     {{item['name']}}
-                    <i style="font-size:0.7em;">
                     % if item['type']=='Weapon':
-                    <!--d6 damage, 1 hand, 3 quality-->
-                    ({{item['damage']}} damage, {{item['hands']}}
-                    {{'hands' if item['hands'] > 1 else 'hand'}}
-                    , {{item['quality']}} quality)
+                    <i style="font-size:0.7em;">
+                    ({{item['damage']}} damage,
+                     {{item['hands']}} {{'hands' if item['hands'] > 1 else 'hand'}},
+                     {{item['quality']}} quality)
+                    </i>
                     % end
-
                     % if item['type']=='Armor' and item['name'] in ['Shield', 'Helmet']:
+                    <i style="font-size:0.7em;">
                     (Defense +{{item['defense']}}, {{item['quality']}} quality)
+                    </i>
                     % end
-
                     % if item['type']=='Armor' and item['name'] not in ['Shield', 'Helmet']:
+                    <i style="font-size:0.7em;">
                     (Defense {{11 + item['defense']}}, {{item['quality']}} quality)
+                    </i>
                     % end
-                </i>
-
-
                 </div>
                 <div class="one columns" style="text-align:center;">{{item['slots']}}</div>
             </div>
@@ -142,6 +151,7 @@
             <div class="row">
                 <div class="offset-by-eight one columns"><b>({{content['used_slots']}}/{{content['total_slots']}})</b></div>
             </div>
+
             <!-- Footnote -->
             <br>
             <div class="row onlyprint" style="display:flex;align-items:center;">
@@ -165,7 +175,8 @@
                     </span>
                 </div>
             </div>
-            <!-- Blank line for legibility -->
+
+            <!-- Blank line for spacing -->
             <div class="row noprint">&nbsp;</div>
         </div>
     </body>
