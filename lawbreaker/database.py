@@ -12,6 +12,19 @@ MAX_CONNECTIONS = 10
 
 class Database(object):
     def __init__(self):
+        """
+        Query to aggregate expiry details grouped by day and month,
+
+            SELECT extract(day from expiry) AS day,
+                   extract(month from expiry) AS month,
+                   count(*)
+            FROM characters
+            GROUP BY day, month
+            ORDER BY day, month;
+
+        Can be created into a view with,
+            CREATE VIEW name AS query
+        """
         database_url = os.environ['DATABASE_URL']
         self.pool = ThreadedConnectionPool(MIN_CONNECTIONS,
                                            MAX_CONNECTIONS,
