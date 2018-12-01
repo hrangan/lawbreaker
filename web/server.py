@@ -5,7 +5,8 @@ import json
 
 from collections import OrderedDict
 from urllib2 import urlopen, HTTPError
-from bottle import route, run, template, static_file, request, response, redirect, hook
+from bottle import route, run, template, static_file, request, redirect, hook, error
+from bottle import HTTPError as BottleHTTPError
 
 from lawbreaker.character import Character
 from lawbreaker.names import Name
@@ -60,21 +61,26 @@ def generate_random():
 
 
 @route('/<character_id>')
+@route('/<character_id>/')
 def fetch_by_id(character_id):
     try:
         character_json = db.select(character_id)
     except NoResultsFound:
-        response.status = 404
-        return template('web/templates/error404')
+        raise BottleHTTPError(404)
 
     return template('web/templates/index',
                     content=json.loads(character_json, object_pairs_hook=OrderedDict),
                     permalink=True)
 
 
-@route('/static/<path:path>')
-def static_files(path):
-    return static_file(path, root=static_root)
+@route('<:re:.*>/static/<filename:path>')
+def static_files(filename):
+    return static_file(filename, root=static_root)
+
+
+@error(404)
+def error404(error):
+    return template('web/templates/error404')
 
 
 @route('/favicon.ico')
