@@ -93,3 +93,4 @@ Favours neutrality.
 Heroku
 ---
 Only requires an app dyno and a postgres database node. `Procfile`, `runtime.txt` and `requirements.txt` take care of deployments.
+[Kaffeine](http://kaffeine.herokuapp.com/) keeps the application running 24/7 on a free dyno
