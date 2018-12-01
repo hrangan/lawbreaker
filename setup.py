@@ -3,7 +3,7 @@
 from distutils.core import setup
 
 setup(name='lawbreaker',
-      version='2.0',
+      version='2.1',
       description='A character generator for Knave',
       author='Harshavardhan Rangan',
       author_email='hvardhan.r@gmail.com',
