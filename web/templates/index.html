@@ -31,33 +31,33 @@
     <body style="font-family: 'Crimson Text', serif !important;font-size:1.8em;margin-top:10px;">
         <div class="container">
             <!-- Header -->
-            <div class="row noprint" style="display:flex;align-items:center;">
+            <div class="row noprint" style="display:flex;align-items:center;text-align:center;">
                 <div class="offset-by-two two columns">
                     <img alt="Konrad I Mazowiecki"
                          src="static/images/Konrad_I_Mazowiecki.jpg"
                          style="max-width:150%;">
                 </div>
                 <div class="six columns" style="margin-left:6.66666% !important;">
-                    <div class="rownoprint" style="display:flex;align-items:center;">
-                        <div class="twelve columns" style="font-family:'Sebaldus-Gotisch';font-size:3em;text-align:center;">
+                    <div class="rownoprint">
+                        <div class="twelve columns" style="font-family:'Sebaldus-Gotisch';font-size:3em;">
                             Lawbreaker
                         </div>
                     </div>
                     <div class="row">
-                        <div class="twelve columns" style="text-align:center;">
+                        <div class="twelve columns">
                             <b>A character generator for the Knave role playing game.</b>
                         </div>
                     </div>
                     % if (not defined('permalink')) or (defined('permalink') and not permalink):
                     <div class="row">
-                        <div class="twelve columns" style="text-align:center;font-size:0.9em;margin-top:1%;margin-bottom:0.5%">
+                        <div class="twelve columns" style="font-size:0.9em;height:60px;padding-top:2%;">
                             <a class="button" href="{{content['id']}}">Permalink</a>
                         </div>
                     </div>
                     % end
                     % if defined('permalink') and permalink:
-                    <div class="row" style="margin-top:1%;margin-bottom:3%;">
-                        <div class="twelve columns" style="text-align:center;font-size:0.8em;">
+                    <div class="row">
+                        <div class="twelve columns" style="font-size:0.8em;height:60px;padding-top:3%;">
                             (This permalink expires after 30 days of inactivity)
                         </div>
                     </div>
