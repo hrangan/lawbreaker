@@ -36,6 +36,16 @@ class Database(object):
         cursor.execute('''CREATE TABLE IF NOT EXISTS characters (character_id text PRIMARY KEY UNIQUE,
                                                                  character_json text,
                                                                  expiry timestamp)''')
+        conn.commit()
+        cursor.close()
+        self.pool.putconn(conn)
+
+        self.clear_expired()
+
+    def clear_expired(self):
+        print 'Deleting expired permalinks'
+        conn = self.pool.getconn()
+        cursor = conn.cursor()
         cursor.execute('''DELETE FROM characters WHERE expiry < now()''')
         conn.commit()
         cursor.close()
