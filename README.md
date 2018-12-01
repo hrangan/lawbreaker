@@ -93,4 +93,8 @@ Favours neutrality.
 Heroku
 ---
 Only requires an app dyno and a postgres database node. `Procfile`, `runtime.txt` and `requirements.txt` take care of deployments.
-[Kaffeine](http://kaffeine.herokuapp.com/) keeps the application running 24/7 on a free dyno
+
+#### Environment Variables
+- `DATABASE_URL` - The postgresql DSN. Set automatically by heroku. Needs to be set manually for local development
+- `APP_LOCATION` - Set to `heroku` on heroku. Add extra behaviour when running on heroku or any other hosting service
+- `KEEP_AWAKE` - Set to `true` on production dyno's. Polls https://lawbreaker.herokuapp.com/keep_awake every 25 minutes. This is to prevent the free dyno from sleeping
