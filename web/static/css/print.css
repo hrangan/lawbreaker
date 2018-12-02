@@ -1,7 +1,10 @@
 /* CSS to hide automatic headers and footers when printing. This hides things
  * like URL, date, etc.
  */
-@page { size: auto;  margin: 0mm; }
+@page {
+  size: portrait;
+  margin: 0mm;
+}
 
 /* In normal (non print) rendering, this will hide elements that should only
  * show up while printing
