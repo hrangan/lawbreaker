@@ -16,7 +16,7 @@ def main():
 
     args = parser.parse_args()
     char = Character(name=args.randomName and Name.get() or " ".join(args.name), level=args.level)
-    print char
+    print(char)
 
 
 if __name__ == "__main__":
