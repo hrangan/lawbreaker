@@ -58,6 +58,7 @@ def secure_template(*args, **kwargs):
                                                    "frame-ancestors 'self'"
                                                    )
     response.headers['X-Content-Type-Options'] = 'nosniff'
+    response.headers['Referrer-Policy'] = 'no-referrer'
     return response
 
 
