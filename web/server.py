@@ -4,7 +4,8 @@ import sys
 import json
 
 from collections import OrderedDict
-from urllib2 import urlopen, HTTPError
+from urllib.request import urlopen
+from urllib.error import HTTPError
 from bottle import route, run, template, static_file, request, redirect, hook, error
 from bottle import HTTPError as BottleHTTPError
 
@@ -44,7 +45,7 @@ if os.environ.get('APP_LOCATION') == 'heroku':
                 run.
             """
             try:
-                print 'Polling https://lawbreaker.herokuapp.com/keep_awake'
+                print('Polling https://lawbreaker.herokuapp.com/keep_awake')
                 urlopen("https://lawbreaker.herokuapp.com/keep_awake")
             except HTTPError:
                 pass
