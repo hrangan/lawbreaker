@@ -51,8 +51,7 @@ def generate_random():
     character_json = repr(character)
     db.insert(character.id, character_json)
     return render_template('index.html',
-                           content=json.loads(character_json, object_pairs_hook=OrderedDict),
-                           permalink=False)
+                           content=json.loads(character_json, object_pairs_hook=OrderedDict))
 
 
 @app.route('/<character_id>/')
