@@ -47,7 +47,7 @@ if os.environ.get('APP_LOCATION') == 'heroku':
 
 @app.after_request
 def security_headers(response):
-    response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+    response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains; preload'
     response.headers['Content-Security-Policy'] = (
                                                    "default-src 'none'; "
                                                    "font-src 'self' https://fonts.gstatic.com data;"
