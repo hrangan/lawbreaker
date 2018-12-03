@@ -1,5 +1,5 @@
 .
-bottle==0.12.13
-waitress==1.1.0
+Flask==1.0.2
 psycopg2-binary==2.7.6.1
-flask
+requests==2.20.1
+waitress==1.1.0

@@ -4,8 +4,8 @@ import sys
 import json
 
 from collections import OrderedDict
-from urllib.request import urlopen
-from urllib.error import HTTPError
+
+from requests import get as requests_get
 from flask import Flask, render_template, abort, request, redirect
 
 from lawbreaker.character import Character
@@ -25,29 +25,15 @@ if os.environ.get('APP_LOCATION') == 'heroku':
     @app.before_request
     def before_request():
         if request.headers.get('X-Forwarded-Proto', 'http') != 'https':
-            url = request.url.replace('http://', 'https://', 1)
-            code = 301
-            return redirect(url, code=code)
+            return redirect(request.url.replace('http://', 'https://', 1), code=301)
 
-    def clear_expired():
-        db.clear_expired()
-    spawn_daemon(clear_expired, interval=12*60*60)  # Runs every 12 hours
+    spawn_daemon(lambda: db.clear_expired(),
+                 interval=12*60*60)  # Runs every 12 hours
 
     if os.environ.get('KEEP_AWAKE', 'false').lower() == 'true':
-        def keep_awake():
-            """ Keep-awake polling
-
-                Sets up a daemon that polls https://lawbreaker.herokuapp.com
-                every 25 minutes to stop the dyno from sleeping. An invalid URL
-                is used so that the full character creation process does not
-                run.
-            """
-            try:
-                print('Polling https://lawbreaker.herokuapp.com/keep_awake')
-                urlopen("https://lawbreaker.herokuapp.com/keep_awake")
-            except HTTPError:
-                pass
-        spawn_daemon(keep_awake, interval=25*60)
+        print('Polling https://lawbreaker.herokuapp.com/keep_awake')
+        spawn_daemon(requests_get("https://lawbreaker.herokuapp.com/keep_awake"),
+                     interval=25*60)
 
 
 @app.route('/')
@@ -77,7 +63,7 @@ def fetch_by_id(character_id):
 
 @app.errorhandler(404)
 def error404(error):
-    return render_template('error404.html'), 404
+    return render_template('404.html'), 404
 
 
 def main():
