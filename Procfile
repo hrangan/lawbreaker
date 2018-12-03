@@ -1,1 +1,1 @@
-web: python web/server.py
+web: knave.web

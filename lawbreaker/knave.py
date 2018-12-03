@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 import argparse
 
-from character import Character
-from names import Name
+from lawbreaker.character import Character
+from lawbreaker.names import Name
 
 
 def main():
