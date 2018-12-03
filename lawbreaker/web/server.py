@@ -43,8 +43,7 @@ def generate_random():
     character_json = repr(character)
     db.insert(character.id, character_json)
     return render_template('index.html',
-                           content=json.loads(character_json,
-                                              object_pairs_hook=OrderedDict),
+                           content=json.loads(character_json, object_pairs_hook=OrderedDict),
                            permalink=False)
 
 
@@ -57,8 +56,7 @@ def fetch_by_id(character_id):
         abort(404)
 
     return render_template('index.html',
-                           content=json.loads(character_json,
-                                              object_pairs_hook=OrderedDict),
+                           content=json.loads(character_json, object_pairs_hook=OrderedDict),
                            permalink=True)
 
 
