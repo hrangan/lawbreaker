@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import os
-import sys
 import json
 
 from collections import OrderedDict
@@ -18,7 +17,6 @@ from waitress import serve
 
 app = Flask(__name__)
 db = Database()
-static_root = os.path.abspath(os.path.split(sys.argv[0])[0]) + '/static'
 
 
 if os.environ.get('APP_LOCATION') == 'heroku':
