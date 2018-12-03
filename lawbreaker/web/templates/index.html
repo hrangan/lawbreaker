@@ -23,23 +23,23 @@
 
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/normalize.min.css') }}" />
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/skeleton.min.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/lawbreaker.css') }}" />
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/print.css') }}" />
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/font.css') }}" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Crimson+Text" />
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
     </head>
-    <body style="font-family: 'Crimson Text', serif !important;font-size:1.8em;margin-top:10px;">
+    <body>
         <div class="container">
             <!-- Header -->
-            <div class="row noprint" style="display:flex;align-items:center;text-align:center;">
+            <div class="row noprint header center-text">
                 <div class="offset-by-two two columns">
                     <img alt="Konrad I Mazowiecki"
-                         src="{{ url_for('static', filename='images/Konrad_I_Mazowiecki.jpg') }}"
-                         style="max-width:150%;">
+                         src="{{ url_for('static', filename='images/Konrad_I_Mazowiecki.jpg') }}">
                 </div>
-                <div class="six columns" style="margin-left:6.66666% !important;">
+                <div class="six columns shift-right">
                     <div class="rownoprint">
-                        <div class="twelve columns" style="font-family:'Sebaldus-Gotisch';font-size:3em;">
+                        <div class="twelve columns heading">
                             Lawbreaker
                         </div>
                     </div>
@@ -50,13 +50,13 @@
                     </div>
                     {% if permalink %}
                     <div class="row">
-                        <div class="twelve columns" style="font-size:0.8em;height:60px;padding-top:3%;">
+                        <div class="twelve columns permalink-text">
                             (This permalink expires after 30 days of inactivity)
                         </div>
                     </div>
                     {% else %}
                     <div class="row">
-                        <div class="twelve columns" style="font-size:0.9em;height:60px;padding-top:2%;">
+                        <div class="twelve columns permalink-button">
                             <a class="button" href="{{content['id']}}">Permalink</a>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="offset-by-one ten columns noprint" style="margin-top:-3%;"><hr></div>
+                <div class="offset-by-one ten columns noprint hr-margin"><hr></div>
             </div>
 
             <!-- Basic details -->
@@ -72,17 +72,17 @@
                 <div class="offset-by-two one columns"><b>Name:</b></div>
                 <div class="two columns">{{content['name']}}</div>
                 <div class="one columns" ><b>XP:&nbsp;&nbsp;</b>{{content['xp']}}</div>
-                <div class="two columns" style="text-align:center;"><b>Level:&nbsp;&nbsp;</b>{{content['level']}}</div>
+                <div class="two columns center-text"><b>Level:&nbsp;&nbsp;</b>{{content['level']}}</div>
                 <div class="two columns" ><b>HP:&nbsp;&nbsp;</b> {{content['hit_points']}} / {{content['hit_points']}}</div>
             </div>
             <br>
 
             <!-- Traits -->
             <div class="row">
-                <div class="offset-by-two eight columns" style="font-family:'Sebaldus-Gotisch';font-size:1.9em;">Traits</div>
+                <div class="offset-by-two eight columns sub-heading">Traits</div>
             </div>
             <div class="row">
-                <div class="offset-by-two eight columns" style="text-align:justify;">
+                <div class="offset-by-two eight columns justify-text">
                     {{content['traits']['background'].title()}}.
                     Wears {{content['traits']['clothing']}} clothes, and has {{content['traits']['speech']}} speech.
                     Has
@@ -99,35 +99,35 @@
 
             <!-- Attributes -->
             <div class="row">
-                <div class="offset-by-two eight columns" style="font-family:'Sebaldus-Gotisch';font-size:1.9em;">Attributes</div>
+                <div class="offset-by-two eight columns sub-heading">Attributes</div>
             </div>
-            <div class="row">
-                <div class="offset-by-three two columns" style="text-align:center;"><b>Defense</b></div>
-                <div class="two columns" style="text-align:center;"><b>Attribute</b></div>
-                <div class="two columns" style="text-align:center;"><b>Bonus</b></div>
+            <div class="row center-text">
+                <div class="offset-by-three two columns"><b>Defense</b></div>
+                <div class="two columns"><b>Attribute</b></div>
+                <div class="two columns"><b>Bonus</b></div>
             </div>
             {% for (attribute, attribute_defense) in content["attributes"].items() %}
-            <div class="row">
-                <div class="offset-by-three two columns" style="text-align:center;">{{attribute_defense}}</div>
-                <div class="two columns" style="text-align:center;">{{attribute.title()}}</div>
-                <div class="two columns" style="text-align:center;">{{attribute_defense - 10}}</div>
+            <div class="row center-text">
+                <div class="offset-by-three two columns">{{attribute_defense}}</div>
+                <div class="two columns">{{attribute.title()}}</div>
+                <div class="two columns">{{attribute_defense - 10}}</div>
             </div>
             {% endfor %}
             <br>
-            <div class="row">
-                <div class="offset-by-three two columns" style="text-align:center;">{{content['armor_defense']}}</div>
-                <div class="two columns" style="text-align:center;">Armor</div>
-                <div class="two columns" style="text-align:center;">{{content['armor_defense'] - 10}}</div>
+            <div class="row center-text">
+                <div class="offset-by-three two columns">{{content['armor_defense']}}</div>
+                <div class="two columns">Armor</div>
+                <div class="two columns">{{content['armor_defense'] - 10}}</div>
             </div>
             <br>
 
             <!-- Inventory -->
             <div class="row">
-                <div class="offset-by-two eight columns" style="font-family:'Sebaldus-Gotisch';font-size:1.9em;">Inventory</div>
+                <div class="offset-by-two eight columns sub-heading">Inventory</div>
             </div>
             <div class="row">
                 <div class="offset-by-two six columns"><b>Name</b></div>
-                <div class="one columns" style="text-align:center;"><b>Slots</b></div>
+                <div class="one columns center-text"><b>Slots</b></div>
             </div>
             {% for item in content["inventory"] %}
             <div class="row">
@@ -137,22 +137,22 @@
                     {% endif %}
                     {{item['name']}}
                     {% if item['type']=='Weapon' %}
-                    <i style="font-size:0.7em;">
+                    <i class="footnote">
                     ({{item['damage']}} damage,
                      {{item['hands']}} {{'hands' if item['hands'] > 1 else 'hand'}},
                      {{item['quality']}} quality)
                     </i>
                     {% elif item['type']=='Armor' and item['name'] in ['Shield', 'Helmet'] %}
-                    <i style="font-size:0.7em;">
+                    <i class="footnote">
                     (Defense +{{item['defense']}}, {{item['quality']}} quality)
                     </i>
                     {% elif item['type']=='Armor' and item['name'] not in ['Shield', 'Helmet'] %}
-                    <i style="font-size:0.7em;">
+                    <i class="footnote">
                     (Defense {{11 + item['defense']}}, {{item['quality']}} quality)
                     </i>
                     {% endif %}
                 </div>
-                <div class="one columns" style="text-align:center;">{{item['slots']}}</div>
+                <div class="one columns center-text">{{item['slots']}}</div>
             </div>
             {% endfor %}
             <div class="row">
@@ -161,19 +161,19 @@
 
             <!-- Footnote -->
             <br>
-            <div class="row onlyprint" style="display:flex;align-items:center;">
-                <div class="offset-by-two eight columns" style="font-family:'Sebaldus-Gotisch';font-size:3em;text-align:center;">Lawbreaker</div>
+            <div class="row onlyprint header center-text">
+                <div class="offset-by-two eight columns heading">Lawbreaker</div>
             </div>
-            <div class="row onlyprint">
-                <div class="offset-by-two eight columns" style="text-align:center;"><b>A character generator for the Knave role playing game.</b></div>
+            <div class="row onlyprint center-text">
+                <div class="offset-by-two eight columns"><b>A character generator for the Knave role playing game.</b></div>
             </div>
-            <div class="row onlyprint">
-                <div class="offset-by-two eight columns" style="text-align:center;">https://lawbreaker.herokuapp.com</div>
+            <div class="row onlyprint center-text">
+                <div class="offset-by-two eight columns">https://lawbreaker.herokuapp.com</div>
             </div>
             <br class="onlyprint">
-            <div class="row">
-                <div class="twelve columns" style="text-align:center;">
-                    <span style="font-size:0.7em;">
+            <div class="row center-text">
+                <div class="twelve columns">
+                    <span class="footnote">
                     <a href="https://github.com/hrangan/lawbreaker" target="github">Lawbreaker</a> by hrangan
                     ·
                     <a href="https://www.drivethrurpg.com/product/250888/Knave" target="knave">Knave</a> by Questing Beast
