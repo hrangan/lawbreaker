@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        % if (not defined('permalink')) or (defined('permalink') and not permalink):
-        <title>Lawbreaker: A Knave character generator</title>
-
-        <meta property="og:title" content="Lawbreaker: A Knave character generator" />
-        <meta property="og:url" content="https://lawbreaker.herokuapp.com/" />
-        % end
-        % if defined('permalink') and permalink:
+        {% if permalink %}
         <title>Lawbreaker: {{content['name']}}</title>
 
         <meta property="og:title" content="Lawbreaker: {{content['name']}}" />
         <meta property="og:url" content="https://lawbreaker.herokuapp.com/{{content['id']}}" />
-        % end
+        {% else %}
+        <title>Lawbreaker: A Knave character generator</title>
+
+        <meta property="og:title" content="Lawbreaker: A Knave character generator" />
+        <meta property="og:url" content="https://lawbreaker.herokuapp.com/" />
+        {% endif %}
         <meta property="og:type" content="website" />
         <meta property="og:image" content="https://lawbreaker.herokuapp.com/static/images/thumbnail.png" />
         <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="370" />
         <meta property="og:image:height" content="370" />
 
-        <link rel="preload" href="static/css/font.css" as="style">
-        <link rel="preload" href="static/images/Konrad_I_Mazowiecki.jpg" as="image">
+        <link rel="preload" href="{{ url_for('static', filename='css/font.css') }}" as="style" />
+        <link rel="preload" href="{{ url_for('static', filename='images/Konrad_I_Mazowiecki.jpg') }}" as="image" />
 
-        <link rel="stylesheet" type="text/css" href="static/css/normalize.min.css" />
-        <link rel="stylesheet" type="text/css" href="static/css/skeleton.min.css" />
-        <link rel="stylesheet" type="text/css" href="static/css/print.css" />
-        <link rel="stylesheet" type="text/css" href="static/css/font.css" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Crimson+Text">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/normalize.min.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/skeleton.min.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/print.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/font.css') }}" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Crimson+Text" />
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
     </head>
     <body style="font-family: 'Crimson Text', serif !important;font-size:1.8em;margin-top:10px;">
         <div class="container">
@@ -34,7 +34,7 @@
             <div class="row noprint" style="display:flex;align-items:center;text-align:center;">
                 <div class="offset-by-two two columns">
                     <img alt="Konrad I Mazowiecki"
-                         src="static/images/Konrad_I_Mazowiecki.jpg"
+                         src="{{ url_for('static', filename='images/Konrad_I_Mazowiecki.jpg') }}"
                          style="max-width:150%;">
                 </div>
                 <div class="six columns" style="margin-left:6.66666% !important;">
@@ -48,20 +48,19 @@
                             <b>A character generator for the Knave role playing game.</b>
                         </div>
                     </div>
-                    % if (not defined('permalink')) or (defined('permalink') and not permalink):
-                    <div class="row">
-                        <div class="twelve columns" style="font-size:0.9em;height:60px;padding-top:2%;">
-                            <a class="button" href="{{content['id']}}">Permalink</a>
-                        </div>
-                    </div>
-                    % end
-                    % if defined('permalink') and permalink:
+                    {% if permalink %}
                     <div class="row">
                         <div class="twelve columns" style="font-size:0.8em;height:60px;padding-top:3%;">
                             (This permalink expires after 30 days of inactivity)
                         </div>
                     </div>
-                    % end
+                    {% else %}
+                    <div class="row">
+                        <div class="twelve columns" style="font-size:0.9em;height:60px;padding-top:2%;">
+                            <a class="button" href="{{content['id']}}">Permalink</a>
+                        </div>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
             <div class="row">
@@ -107,13 +106,13 @@
                 <div class="two columns" style="text-align:center;"><b>Attribute</b></div>
                 <div class="two columns" style="text-align:center;"><b>Bonus</b></div>
             </div>
-            % for (attribute, attribute_defense) in content["attributes"].iteritems():
+            {% for (attribute, attribute_defense) in content["attributes"].items() %}
             <div class="row">
                 <div class="offset-by-three two columns" style="text-align:center;">{{attribute_defense}}</div>
                 <div class="two columns" style="text-align:center;">{{attribute.title()}}</div>
                 <div class="two columns" style="text-align:center;">{{attribute_defense - 10}}</div>
             </div>
-            % end
+            {% endfor %}
             <br>
             <div class="row">
                 <div class="offset-by-three two columns" style="text-align:center;">{{content['armor_defense']}}</div>
@@ -130,34 +129,34 @@
                 <div class="offset-by-two six columns"><b>Name</b></div>
                 <div class="one columns" style="text-align:center;"><b>Slots</b></div>
             </div>
-            % for item in content["inventory"]:
+            {% for item in content["inventory"] %}
             <div class="row">
                 <div class="offset-by-two columns six columns">
-                    % if item['equipped']:
+                    {% if item['equipped'] %}
                     (E)
-                    % end
+                    {% endif %}
                     {{item['name']}}
-                    % if item['type']=='Weapon':
+                    {% if item['type']=='Weapon' %}
                     <i style="font-size:0.7em;">
                     ({{item['damage']}} damage,
                      {{item['hands']}} {{'hands' if item['hands'] > 1 else 'hand'}},
                      {{item['quality']}} quality)
                     </i>
-                    % end
-                    % if item['type']=='Armor' and item['name'] in ['Shield', 'Helmet']:
+                    {% endif %}
+                    {% if item['type']=='Armor' and item['name'] in ['Shield', 'Helmet'] %}
                     <i style="font-size:0.7em;">
                     (Defense +{{item['defense']}}, {{item['quality']}} quality)
                     </i>
-                    % end
-                    % if item['type']=='Armor' and item['name'] not in ['Shield', 'Helmet']:
+                    {% endif %}
+                    {% if item['type']=='Armor' and item['name'] not in ['Shield', 'Helmet'] %}
                     <i style="font-size:0.7em;">
                     (Defense {{11 + item['defense']}}, {{item['quality']}} quality)
                     </i>
-                    % end
+                    {% endif %}
                 </div>
                 <div class="one columns" style="text-align:center;">{{item['slots']}}</div>
             </div>
-            % end
+            {% endfor %}
             <div class="row">
                 <div class="offset-by-eight one columns"><b>({{content['used_slots']}}/{{content['total_slots']}})</b></div>
             </div>

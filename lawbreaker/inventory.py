@@ -1,4 +1,4 @@
-from exceptions import InventoryFullException
+from lawbreaker.exceptions import InventoryFullException
 
 
 class Inventory(object):
