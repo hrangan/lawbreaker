@@ -1,7 +1,7 @@
 import re
 import random
 
-from exceptions import InvalidDiceFormat
+from lawbreaker.exceptions import InvalidDiceFormat
 
 
 class Dice(object):

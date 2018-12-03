@@ -43,7 +43,7 @@ class Database(object):
         self.clear_expired()
 
     def clear_expired(self):
-        print 'Deleting expired permalinks'
+        print('Deleting expired permalinks')
         conn = self.pool.getconn()
         cursor = conn.cursor()
         cursor.execute('''DELETE FROM characters WHERE expiry < now()''')
