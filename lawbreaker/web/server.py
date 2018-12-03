@@ -5,7 +5,7 @@ import json
 from collections import OrderedDict
 
 from requests import get
-from flask import Flask, render_template, abort, request, redirect, make_response
+from flask import Flask, render_template, abort, request, redirect
 
 from lawbreaker.character import Character
 from lawbreaker.names import Name
@@ -45,8 +45,8 @@ if os.environ.get('APP_LOCATION') == 'heroku':
         spawn_daemon(keep_awake, interval=25*60)
 
 
-def secure_template(*args, **kwargs):
-    response = make_response(render_template(*args, **kwargs))
+@app.after_request
+def security_headers(response):
     response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
     response.headers['Content-Security-Policy'] = (
                                                    "default-src 'none'; "
@@ -62,12 +62,17 @@ def secure_template(*args, **kwargs):
     return response
 
 
+@app.errorhandler(404)
+def error404(error):
+    return render_template('404.html'), 404
+
+
 @app.route('/')
 def generate_random():
     character = Character(name=Name.get())
     character_json = repr(character)
     db.insert(character.id, character_json)
-    return secure_template('index.html', content=json.loads(character_json, object_pairs_hook=OrderedDict))
+    return render_template('index.html', content=json.loads(character_json, object_pairs_hook=OrderedDict))
 
 @app.route('/<character_id>/')
 @app.route('/<character_id>')
@@ -76,14 +81,9 @@ def fetch_by_id(character_id):
         character_json = db.select(character_id)
     except NoResultsFound:
         abort(404)
-    return secure_template('index.html',
+    return render_template('index.html',
                            content=json.loads(character_json, object_pairs_hook=OrderedDict),
                            permalink=True)
-
-
-@app.errorhandler(404)
-def error404(error):
-    return secure_template('404.html'), 404
 
 
 def main():
