@@ -24,7 +24,11 @@ db = Database()
 
 if os.environ.get('APP_LOCATION') == 'heroku':
     @app.before_request
-    def before_request():
+    def ssl_redirect():
+        """ Redirect incoming http requests to https
+            This doesn't work on a local server since there are no SSL
+            certificates.
+        """
         if request.headers.get('X-Forwarded-Proto', 'http') != 'https':
             return redirect(request.url.replace('http://', 'https://', 1), code=301)
 
@@ -32,6 +36,10 @@ if os.environ.get('APP_LOCATION') == 'heroku':
 
     if os.environ.get('KEEP_AWAKE', 'false').lower() == 'true':
         def keep_awake():
+            """ Polls https://lawbreaker.herokuapp.com/keep_awake every 25
+                minutes to stop the dyno from sleeping. An invalid URL is used
+                so that the full character creation process is not run.
+            """
             print('Polling https://lawbreaker.herokuapp.com/keep_awake')
             get("https://lawbreaker.herokuapp.com/keep_awake")
         spawn_daemon(keep_awake, interval=25*60)
