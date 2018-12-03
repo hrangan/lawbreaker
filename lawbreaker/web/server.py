@@ -29,8 +29,10 @@ if os.environ.get('APP_LOCATION') == 'heroku':
                  interval=12*60*60)  # Runs every 12 hours
 
     if os.environ.get('KEEP_AWAKE', 'false').lower() == 'true':
-        print('Polling https://lawbreaker.herokuapp.com/keep_awake')
-        spawn_daemon(requests_get("https://lawbreaker.herokuapp.com/keep_awake"),
+        def keep_awake():
+            print('Polling https://lawbreaker.herokuapp.com/keep_awake')
+            requests_get("https://lawbreaker.herokuapp.com/keep_awake")
+        spawn_daemon(keep_awake,
                      interval=25*60)
 
 
