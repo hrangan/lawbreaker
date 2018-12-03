@@ -47,8 +47,8 @@ def generate_random():
                            permalink=False)
 
 
-@app.route('/<character_id>')
 @app.route('/<character_id>/')
+@app.route('/<character_id>')
 def fetch_by_id(character_id):
     try:
         character_json = db.select(character_id)
