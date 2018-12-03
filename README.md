@@ -9,7 +9,7 @@ Install Steps:
 ### Python dependencies
 1. For the web server (along with the command-line tool). This has a dependency on libpq-dev (on Ubuntu 14.04)
 
-`$ pip install -r requirements.py`
+`$ pip install .[web]`
 
 2. For only the command line tool.
 
@@ -33,7 +33,7 @@ Usage:
 
 Web
 ---
-`$ python web/server.py`
+`$ knave.web`
 
 Command line
 ---
