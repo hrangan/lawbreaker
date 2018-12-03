@@ -1,6 +1,6 @@
 import random
 
-from exceptions import InvalidItemCategoryException, InvalidItemAttribute
+from lawbreaker.exceptions import InvalidItemCategoryException, InvalidItemAttribute
 
 
 class BaseItem(object):
