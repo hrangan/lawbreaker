@@ -6,30 +6,28 @@ import json
 from collections import OrderedDict
 from urllib.request import urlopen
 from urllib.error import HTTPError
-from bottle import route, run, template, static_file, request, redirect, hook, error
-from bottle import HTTPError as BottleHTTPError
+from flask import Flask, render_template, abort, request, redirect
 
 from lawbreaker.character import Character
 from lawbreaker.names import Name
-from lawbreaker.database import Database
 from lawbreaker.exceptions import NoResultsFound
-from lawbreaker.utils import spawn_daemon
+from lawbreaker.web.database import Database
+from lawbreaker.web.utils import spawn_daemon
 
+from waitress import serve
 
+app = Flask(__name__)
 db = Database()
 static_root = os.path.abspath(os.path.split(sys.argv[0])[0]) + '/static'
 
 
 if os.environ.get('APP_LOCATION') == 'heroku':
-    @hook('before_request')
-    def ssl_redirect():
-        """ Redirect incoming http requests to https
-
-            This doesn't work on a local server since there are no SSL
-            certificates.
-        """
-        if request.get_header('X-Forwarded-Proto', 'http') != 'https':
-            redirect(request.url.replace('http://', 'https://', 1), code=301)
+    @app.before_request
+    def before_request():
+        if request.headers.get('X-Forwarded-Proto', 'http') != 'https':
+            url = request.url.replace('http://', 'https://', 1)
+            code = 301
+            return redirect(url, code=code)
 
     def clear_expired():
         db.clear_expired()
@@ -52,45 +50,39 @@ if os.environ.get('APP_LOCATION') == 'heroku':
         spawn_daemon(keep_awake, interval=25*60)
 
 
-@route('/')
+@app.route('/')
 def generate_random():
     character = Character(name=Name.get())
     character_json = repr(character)
     db.insert(character.id, character_json)
-    return template('web/templates/index',
-                    content=json.loads(character_json, object_pairs_hook=OrderedDict))
+    return render_template('index.html',
+                           content=json.loads(character_json,
+                                              object_pairs_hook=OrderedDict),
+                           permalink=False)
 
 
-@route('/<character_id>')
-@route('/<character_id>/')
+@app.route('/<character_id>')
+@app.route('/<character_id>/')
 def fetch_by_id(character_id):
     try:
         character_json = db.select(character_id)
     except NoResultsFound:
-        raise BottleHTTPError(404)
+        abort(404)
 
-    return template('web/templates/index',
-                    content=json.loads(character_json, object_pairs_hook=OrderedDict),
-                    permalink=True)
-
-
-@route('<:re:.*>/static/<filename:path>')
-def static_files(filename):
-    return static_file(filename, root=static_root)
+    return render_template('index.html',
+                           content=json.loads(character_json,
+                                              object_pairs_hook=OrderedDict),
+                           permalink=True)
 
 
-@error(404)
+@app.errorhandler(404)
 def error404(error):
-    return template('web/templates/error404')
+    return render_template('error404.html'), 404
 
 
-@route('/favicon.ico')
-def favicon():
-    return static_file('/favicon.ico', root=static_root)
+def main():
+    serve(app, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
 
 
 if __name__ == '__main__':
-    if os.environ.get('APP_LOCATION') == 'heroku':
-        run(server="waitress", host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
-    else:
-        run(server="waitress", host='localhost', port=5000, reloader=True, debug=True)
+    main()

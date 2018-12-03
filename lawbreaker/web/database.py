@@ -28,8 +28,7 @@ class Database(object):
         database_url = os.environ['DATABASE_URL']
         self.pool = ThreadedConnectionPool(MIN_CONNECTIONS,
                                            MAX_CONNECTIONS,
-                                           dsn=database_url,
-                                           sslmode='require')
+                                           dsn=database_url,)
 
         conn = self.pool.getconn()
         cursor = conn.cursor()

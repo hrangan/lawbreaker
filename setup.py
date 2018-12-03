@@ -11,6 +11,8 @@ setup(name='lawbreaker',
       entry_points={
           'console_scripts': [
               'knave = lawbreaker.knave:main',
+              'knave.web = lawbreaker.web.server:main',
              ],
-            }
+            },
+      include_package_data=True,
       )
