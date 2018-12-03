@@ -25,15 +25,13 @@ if os.environ.get('APP_LOCATION') == 'heroku':
         if request.headers.get('X-Forwarded-Proto', 'http') != 'https':
             return redirect(request.url.replace('http://', 'https://', 1), code=301)
 
-    spawn_daemon(lambda: db.clear_expired(),
-                 interval=12*60*60)  # Runs every 12 hours
+    spawn_daemon(lambda: db.clear_expired(), interval=12*60*60)  # Runs every 12 hours
 
     if os.environ.get('KEEP_AWAKE', 'false').lower() == 'true':
         def keep_awake():
             print('Polling https://lawbreaker.herokuapp.com/keep_awake')
             requests_get("https://lawbreaker.herokuapp.com/keep_awake")
-        spawn_daemon(keep_awake,
-                     interval=25*60)
+        spawn_daemon(keep_awake, interval=25*60)
 
 
 @app.route('/')
