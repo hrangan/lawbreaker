@@ -14,20 +14,21 @@
 
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/normalize.min.css') }}" />
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/skeleton.min.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/lawbreaker.css') }}" />
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/print.css') }}" />
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/font.css') }}" />
 
         <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet" />
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
     </head>
-    <body style="margin:100px;font-family: 'Crimson Text', serif !important;">
+    <body>
         <div class="container">
             <!-- 404 Error Message -->
             <div class="row">
-                <div class="twelve columns" style="font-family:'Sebaldus-Gotisch';font-size:5em;text-align:center;">404</div>
+                <div class="twelve columns error-heading">404</div>
             </div>
             <div class="row">
-                <div class="twelve columns" style="font-size:2em;text-align:center;">Character not found</div>
+                <div class="twelve columns error-text">Character not found</div>
             </div>
         </div>
     </body>

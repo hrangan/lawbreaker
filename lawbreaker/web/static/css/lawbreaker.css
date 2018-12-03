@@ -1,0 +1,78 @@
+body {
+  font-family: 'Crimson Text', serif;
+  font-size:1.8em;
+  margin-top:10px;
+}
+
+img {
+  max-width:150%;
+}
+
+.header {
+  display:flex;
+  align-items:center;
+}
+
+.center-text {
+  text-align:center;
+}
+
+.justify-text {
+  text-align:justify;
+}
+
+.sub-heading {
+  font-family:'Sebaldus-Gotisch';
+  font-size:1.9em;
+}
+
+.heading {
+  font-family:'Sebaldus-Gotisch';
+  font-size:3em;
+}
+
+.footnote {
+  font-size:0.7em;
+}
+
+.shift-right {
+  margin-left:6.66666%;
+}
+
+.permalink-text {
+  font-size:0.8em;
+  height:60px;
+  padding-top:3%;
+}
+
+.permalink-button {
+  font-size:0.9em;
+  height:60px;
+  padding-top:2%;
+}
+
+.hr-margin {
+  margin-top:-3%;
+}
+
+.maintenance-header {
+  font-family:'Sebaldus-Gotisch';
+  font-size:3em;
+  text-align:center;
+}
+
+.maintenance-text {
+  font-size:2em;
+  text-align:justify;
+}
+
+.error-heading {
+  font-family:'Sebaldus-Gotisch';
+  font-size:5em;
+  text-align:center;
+}
+
+.error-text {
+  font-size:2em;
+  text-align:center;
+}

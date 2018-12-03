@@ -45,14 +45,34 @@ if os.environ.get('APP_LOCATION') == 'heroku':
         spawn_daemon(keep_awake, interval=25*60)
 
 
+@app.after_request
+def security_headers(response):
+    response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+    response.headers['Content-Security-Policy'] = (
+                                                   "default-src 'none'; "
+                                                   "font-src 'self' https://fonts.gstatic.com data;"
+                                                   "img-src 'self';"
+                                                   "object-src 'none';"
+                                                   "script-src 'none';"
+                                                   "style-src 'self' https://fonts.googleapis.com;"
+                                                   "frame-ancestors 'self'"
+                                                   )
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+    response.headers['Referrer-Policy'] = 'no-referrer'
+    return response
+
+
+@app.errorhandler(404)
+def error404(error):
+    return render_template('404.html'), 404
+
+
 @app.route('/')
 def generate_random():
     character = Character(name=Name.get())
     character_json = repr(character)
     db.insert(character.id, character_json)
-    return render_template('index.html',
-                           content=json.loads(character_json, object_pairs_hook=OrderedDict))
-
+    return render_template('index.html', content=json.loads(character_json, object_pairs_hook=OrderedDict))
 
 @app.route('/<character_id>/')
 @app.route('/<character_id>')
@@ -61,15 +81,9 @@ def fetch_by_id(character_id):
         character_json = db.select(character_id)
     except NoResultsFound:
         abort(404)
-
     return render_template('index.html',
                            content=json.loads(character_json, object_pairs_hook=OrderedDict),
                            permalink=True)
-
-
-@app.errorhandler(404)
-def error404(error):
-    return render_template('404.html'), 404
 
 
 def main():
