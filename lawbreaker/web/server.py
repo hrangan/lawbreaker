@@ -4,7 +4,7 @@ import json
 
 from collections import OrderedDict
 
-from requests import get as requests_get
+from requests import get
 from flask import Flask, render_template, abort, request, redirect
 
 from lawbreaker.character import Character
@@ -16,6 +16,9 @@ from lawbreaker.web.utils import spawn_daemon
 from waitress import serve
 
 app = Flask(__name__)
+app.jinja_env.trim_blocks = True
+app.jinja_env.lstrip_blocks = True
+
 db = Database()
 
 
@@ -30,7 +33,7 @@ if os.environ.get('APP_LOCATION') == 'heroku':
     if os.environ.get('KEEP_AWAKE', 'false').lower() == 'true':
         def keep_awake():
             print('Polling https://lawbreaker.herokuapp.com/keep_awake')
-            requests_get("https://lawbreaker.herokuapp.com/keep_awake")
+            get("https://lawbreaker.herokuapp.com/keep_awake")
         spawn_daemon(keep_awake, interval=25*60)
 
 
