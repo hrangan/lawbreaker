@@ -142,13 +142,11 @@
                      {{item['hands']}} {{'hands' if item['hands'] > 1 else 'hand'}},
                      {{item['quality']}} quality)
                     </i>
-                    {% endif %}
-                    {% if item['type']=='Armor' and item['name'] in ['Shield', 'Helmet'] %}
+                    {% elif item['type']=='Armor' and item['name'] in ['Shield', 'Helmet'] %}
                     <i style="font-size:0.7em;">
                     (Defense +{{item['defense']}}, {{item['quality']}} quality)
                     </i>
-                    {% endif %}
-                    {% if item['type']=='Armor' and item['name'] not in ['Shield', 'Helmet'] %}
+                    {% elif item['type']=='Armor' and item['name'] not in ['Shield', 'Helmet'] %}
                     <i style="font-size:0.7em;">
                     (Defense {{11 + item['defense']}}, {{item['quality']}} quality)
                     </i>
