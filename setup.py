@@ -7,7 +7,9 @@ setup(name='lawbreaker',
       description='A character generator for Knave',
       author='Harshavardhan Rangan',
       author_email='hvardhan.r@gmail.com',
-      packages=['lawbreaker'],
+      packages=['lawbreaker',
+                'lawbreaker.web',
+                ],
       entry_points={
           'console_scripts': [
               'knave = lawbreaker.knave:main',
