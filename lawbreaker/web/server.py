@@ -16,6 +16,7 @@ from lawbreaker.web.utils import spawn_daemon
 from waitress import serve
 
 app = Flask(__name__)
+
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
 
@@ -68,7 +69,7 @@ def error404(error):
 
 
 @app.route('/')
-def generate_random():
+def generate_character():
     character = Character(name=Name.get())
     character_json = repr(character)
     db.insert(character.id, character_json)
