@@ -16,8 +16,6 @@ class Character(object):
     def __init__(self, name="_"*20, level=1):
         self.id = uuid.uuid4().hex
         self.name = name
-        self.level = level
-        self.xp = 1000 * (level - 1)
 
         self.stats = self.create_stats()
         self.hit_points = dice.roll('1d8')[0]
@@ -26,8 +24,11 @@ class Character(object):
         self.inventory = Inventory(self)
         self._basic_loadout()
 
+        self.level = 1
         for x in range(level - 1):
-            self.levelup(x+2)
+            self.levelup()
+        assert self.level == level
+        self.xp = 1000 * (self.level - 1)
 
     def __str__(self):
         return "\n\n\n".join([self._format_basic(),
@@ -121,16 +122,18 @@ class Character(object):
         self.inventory.add(Items.get('general_gear_1'))
         self.inventory.add(Items.get('general_gear_1'))
 
-    def levelup(self, iteration):
+    def levelup(self):
+        self.level = self.level + 1
         count = 3
-        stats = self.stats.keys()
+        attributes = list(self.stats)
         while count > 0:
-            for stat in random.sample(stats, len(stats)):
-                if (self.stats[stat] < 20) and (dice.roll('1d20')[0] < (self.stats[stat])):
-                    self.stats[stat] += 1
+            random.shuffle(attributes)
+            for attribute in attributes:
+                if (self.stats[attribute] < 20) and (dice.roll('1d20')[0] < (self.stats[attribute])):
+                    self.stats[attribute] += 1
                     count -= 1
                     break
-        hp = sum([dice.roll('1d8')[0] for x in range(iteration)])
+        hp = sum([dice.roll('1d8')[0] for x in range(self.level)])
         if hp < self.hit_points:
             self.hit_points += 1
         else:

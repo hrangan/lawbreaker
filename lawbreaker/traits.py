@@ -3,59 +3,58 @@ import random
 
 class Traits(object):
 
-    physique = ["Athletic", "Brawny", "Corpulent", "Delicate", "Gaunt", "Hulking", "Lanky", "Ripped",
-                "Rugged", "Scrawny", "Short", "Sinewy", "Slender", "Flabby", "Statuesque", "Stout",
-                "Tiny", "Towering", "Willowy", "Wiry"]
-    face = ["Bloated", "Blunt", "Bony", "Chiseled", "Delicate", "Elongated", "Patrician", "Pinched",
-            "Hawkish", "Broken", "Impish", "Narrow", "Ratlike", "Round", "Sunken", "Sharp", "Soft",
-            "Square", "Wide", "Wolfish"]
-    skin = ["Battle Scar", "Birthmark", "Burn Scar", "Dark", "Makeup", "Oily", "Pale", "Perfect",
-            "Pierced", "Pockmarked", "Reeking", "Tattooed", "Rosy", "Rough", "Sallow", "Sunburned",
-            "Tanned", "War Paint", "Weathered", "Whip Scar"]
-    hair = ["Bald", "Braided", "Bristly", "Cropped", "Curly", "Disheveled", "Dreadlocks", "Filthy",
-            "Frizzy", "Greased", "Limp", "Long", "Luxurious", "Mohawk", "Oily", "Ponytail", "Silky",
-            "Topknot", "Wavy", "Wispy"]
-    clothing = ["Antique", "Bloody", "Ceremonial", "Decorated", "Eccentric", "Elegant", "Fashionable",
-                "Filthy", "Flamboyant", "Stained", "Foreign", "Frayed", "Frumpy", "Livery", "Oversized",
-                "Patched", "Perfumed", "Rancid", "Torn", "Undersized"]
-    virtues = ["Ambitious", "Cautious", "Courageous", "Courteous", "Curious", "Disciplined", "Focused",
-               "Generous", "Gregarious", "Honest", "Honorable", "Humble", "Idealistic", "Just", "Loyal",
-               "Merciful", "Righteous", "Serene", "Stoic", "Tolerant"]
-    vices = ["Aggressive", "Arrogant", "Bitter", "Cowardly", "Cruel", "Deceitful", "Flippant", "Gluttonous",
-             "Greedy", "Irascible", "Lazy", "Nervous", "Prejudiced", "Reckless", "Rude", "Suspicious", "Vain",
-             "Vengeful", "Wasteful", "Whiny"]
-    speech = ["Blunt", "Booming", "Breathy", "Cryptic", "Drawling", "Droning", "Flowery", "Formal",
-              "Gravelly", "Hoarse", "Mumbling", "Precise", "Quaint", "Rambling", "Rapid-fire", "Dialect",
-              "Slow", "Squeaky", "Stuttering", "Whispery"]
-    background = ["Alchemist", "Beggar", "Butcher", "Burglar", "Charlatan", "Cleric", "Cook", "Cultist",
-                  "Gambler", "Herbalist", "Magician", "Mariner", "Mercenary", "Merchant", "Outlaw",
-                  "Performer", "Pickpocket", "Smuggler", "Student", "Tracker"]
-    misfortunes = ["Abandoned", "Addicted", "Blackmailed", "Condemned", "Cursed", "Defrauded", "Demoted",
-                   "Discredited", "Disowned", "Exiled", "Framed", "Haunted", "Kidnapped", "Mutilated",
-                   "Poor", "Pursued", "Rejected", "Replaced", "Robbed", "Suspected"]
-    alignment = ["Law", "Law", "Law", "Law", "Law",
-                 "Neutrality", "Neutrality", "Neutrality", "Neutrality", "Neutrality",
-                 "Neutrality", "Neutrality", "Neutrality", "Neutrality", "Neutrality",
-                 "Chaos", "Chaos", "Chaos", "Chaos", "Chaos"]
+    physique = ["athletic", "brawny", "corpulent", "delicate", "gaunt", "hulking", "lanky", "ripped",
+                "rugged", "scrawny", "short", "sinewy", "slender", "flabby", "statuesque", "stout",
+                "tiny", "towering", "willowy", "wiry"]
+    face = ["bloated", "blunt", "bony", "chiseled", "delicate", "elongated", "patrician", "pinched",
+            "hawkish", "broken", "impish", "narrow", "ratlike", "round", "sunken", "sharp", "soft",
+            "square", "wide", "wolfish"]
+    skin = ["battle scar", "birthmark", "burn scar", "dark", "makeup", "oily", "pale", "perfect",
+            "pierced", "pockmarked", "reeking", "tattooed", "rosy", "rough", "sallow", "sunburned",
+            "tanned", "war paint", "weathered", "whip scar"]
+    hair = ["bald", "braided", "bristly", "cropped", "curly", "disheveled", "dreadlocks", "filthy",
+            "frizzy", "greased", "limp", "long", "luxurious", "mohawk", "oily", "ponytail", "silky",
+            "topknot", "wavy", "wispy"]
+    clothing = ["antique", "bloody", "ceremonial", "decorated", "eccentric", "elegant", "fashionable",
+                "filthy", "flamboyant", "stained", "foreign", "frayed", "frumpy", "livery", "oversized",
+                "patched", "perfumed", "rancid", "torn", "undersized"]
+    virtues = ["ambitious", "cautious", "courageous", "courteous", "curious", "disciplined", "focused",
+               "generous", "gregarious", "honest", "honorable", "humble", "idealistic", "just", "loyal",
+               "merciful", "righteous", "serene", "stoic", "tolerant"]
+    vices = ["aggressive", "arrogant", "bitter", "cowardly", "cruel", "deceitful", "flippant", "gluttonous",
+             "greedy", "irascible", "lazy", "nervous", "prejudiced", "reckless", "rude", "suspicious", "vain",
+             "vengeful", "wasteful", "whiny"]
+    speech = ["blunt", "booming", "breathy", "cryptic", "drawling", "droning", "flowery", "formal",
+              "gravelly", "hoarse", "mumbling", "precise", "quaint", "rambling", "rapid-fire", "dialect",
+              "slow", "squeaky", "stuttering", "whispery"]
+    background = ["alchemist", "beggar", "butcher", "burglar", "charlatan", "cleric", "cook", "cultist",
+                  "gambler", "herbalist", "magician", "mariner", "mercenary", "merchant", "outlaw",
+                  "performer", "pickpocket", "smuggler", "student", "tracker"]
+    misfortunes = ["abandoned", "addicted", "blackmailed", "condemned", "cursed", "defrauded", "demoted",
+                   "discredited", "disowned", "exiled", "framed", "haunted", "kidnapped", "mutilated",
+                   "poor", "pursued", "rejected", "replaced", "robbed", "suspected"]
+    alignment = ["law", "law", "law", "law", "law",
+                 "neutrality", "neutrality", "neutrality", "neutrality", "neutrality",
+                 "neutrality", "neutrality", "neutrality", "neutrality", "neutrality",
+                 "chaos", "chaos", "chaos", "chaos", "chaos"]
 
     def __init__(self):
-        self.traits = {"physique": random.choice(Traits.physique).lower(),
-                       "face": random.choice(Traits.face).lower(),
-                       "skin": random.choice(Traits.skin).lower(),
-                       "hair": random.choice(Traits.hair).lower(),
-                       "clothing": random.choice(Traits.clothing).lower(),
-                       "virtue": random.choice(Traits.virtues).lower(),
-                       "vice": random.choice(Traits.vices).lower(),
-                       "speech": random.choice(Traits.speech).lower(),
+        self.traits = {"physique": random.choice(Traits.physique),
+                       "face": random.choice(Traits.face),
+                       "skin": random.choice(Traits.skin),
+                       "hair": random.choice(Traits.hair),
+                       "clothing": random.choice(Traits.clothing),
+                       "virtue": random.choice(Traits.virtues),
+                       "vice": random.choice(Traits.vices),
+                       "speech": random.choice(Traits.speech),
                        "background": random.choice(Traits.background),
-                       "misfortune": random.choice(Traits.misfortunes).lower(),
-                       "alignment": random.choice(Traits.alignment).lower()}
+                       "misfortune": random.choice(Traits.misfortunes),
+                       "alignment": random.choice(Traits.alignment)}
 
     def __str__(self):
-
         description_string = ("Traits\n"
                               "--------------------------------------------------\n"
-                              "{background}.  Wears {clothing} clothes, and has {speech} speech.\n"
+                              "A {background}. Wears {clothing} clothes, and has {speech} speech.\n"
                               "Has a {physique} physique, a {face} face, {skin} skin and {hair} hair.\n"
                               "Is {virtue}, but {vice}. Has been {misfortune} in the past.\n"
                               "Favours {alignment}.")
