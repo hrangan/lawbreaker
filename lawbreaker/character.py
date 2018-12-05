@@ -18,21 +18,20 @@ class Character(object):
         self.name = name
         self.level = level
         self.xp = 1000 * (level - 1)
-        self.inventory = Inventory(self)
 
         self.stats = self.create_stats()
         self.hit_points = dice.roll('1d8')[0]
-
-        self.create_stats()
-        self.basic_loadout()
         self.traits = Traits()
 
+        self.inventory = Inventory(self)
+        self._basic_loadout()
+
         for x in range(level - 1):
-            self._levelup(x+2)
+            self.levelup(x+2)
 
     def __str__(self):
-        return "\n\n\n".join([self.format_basic(),
-                              self.format_stats(),
+        return "\n\n\n".join([self._format_basic(),
+                              self._format_stats(),
                               str(self.inventory),
                               str(self.traits)])
 
@@ -55,14 +54,14 @@ class Character(object):
     def armor_defense(self):
         return self.inventory.armor_defense
 
-    def format_basic(self):
+    def _format_basic(self):
         basic_strings = []
         basic_strings.append("Name: {0: ^20}".format(self.name))
         basic_strings.append("XP: {0: >6}   Level: {1: <2}"
                              .format(str(self.xp), str(self.level)))
         return " ".join(basic_strings)
 
-    def format_stats(self):
+    def _format_stats(self):
         format_string = "{0: ^15}{1: ^20}{2: ^15}"
         stat_strings = []
 
@@ -89,7 +88,7 @@ class Character(object):
 
         return stats
 
-    def basic_loadout(self):
+    def _basic_loadout(self):
         while True:
             try:
                 self.add_gear()
@@ -122,7 +121,7 @@ class Character(object):
         self.inventory.add(Items.get('general_gear_1'))
         self.inventory.add(Items.get('general_gear_1'))
 
-    def _levelup(self, iteration):
+    def levelup(self, iteration):
         count = 3
         stats = self.stats.keys()
         while count > 0:
