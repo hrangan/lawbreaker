@@ -132,7 +132,8 @@ class Character(object):
                 if (self.stats[attribute] < 20) and (dice.roll('1d20')[0] < (self.stats[attribute])):
                     self.stats[attribute] += 1
                     count -= 1
-                    break
+                    if count == 0:
+                        break
         hp = sum([dice.roll('1d8')[0] for x in range(self.level)])
         if hp < self.hit_points:
             self.hit_points += 1
