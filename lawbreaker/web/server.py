@@ -75,6 +75,7 @@ def generate_character():
     db.insert(character.id, character_json)
     return render_template('index.html', content=json.loads(character_json, object_pairs_hook=OrderedDict))
 
+
 @app.route('/<character_id>/')
 @app.route('/<character_id>')
 def fetch_by_id(character_id):
