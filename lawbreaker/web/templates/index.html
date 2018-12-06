@@ -27,9 +27,14 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/print.css') }}" />
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/font.css') }}" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Crimson+Text" />
+
+        <script type="text/javascript" src="{{ url_for('static', filename='scripts/lawbreaker.js') }}" defer>
+        </script>
+
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
     </head>
     <body>
+        <div id="progression" class="hidden">{{ content['progression']|tojson }}</div>
         <div class="container">
             <!-- Header -->
             <div class="row noprint header center-text">
@@ -72,7 +77,12 @@
                 <div class="offset-by-two one columns"><b>Name:</b></div>
                 <div class="two columns">{{content['name']}}</div>
                 <div class="one columns" ><b>XP:&nbsp;&nbsp;</b>{{content['xp']}}</div>
-                <div class="two columns center-text"><b>Level:&nbsp;&nbsp;</b>{{content['level']}}</div>
+                <div class="two columns center-text">
+                    <b>Level:</b>
+                    <button class="levelup" onClick="level_up()">+</button>
+                        {{ content['level'] }}
+                    <button class="levelup" onClick="level_down()">-</button>
+                </div>
                 <div class="two columns" ><b>HP:&nbsp;&nbsp;</b> {{content['hit_points']}} / {{content['hit_points']}}</div>
             </div>
             <br>

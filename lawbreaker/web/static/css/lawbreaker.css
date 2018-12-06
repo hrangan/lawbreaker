@@ -76,3 +76,11 @@ img {
   font-size:2em;
   text-align:center;
 }
+
+.levelup {
+  padding: 0 10px;
+}
+
+.hidden {
+  display : none !important;
+}
