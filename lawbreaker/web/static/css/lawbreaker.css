@@ -45,6 +45,11 @@ img {
   padding-top:3%;
 }
 
+.status-text {
+  display: flex;
+  align-items: baseline;
+}
+
 .permalink-button {
   font-size:0.9em;
   height:60px;

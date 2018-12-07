@@ -16,11 +16,12 @@ function level_down() {
     change_level();
 }
 
-function change_level() {
-    document.getElementById("hit_points").innerHTML = progression[level]['hit_points'];
+function change_level(event_obj) {
+    level = event_obj["currentTarget"]["value"]
+    document.getElementById("hit_points").innerHTML = progression[level]['hit_points'] + " / " + progression[level]['hit_points'];
     document.getElementById("xp").innerHTML = progression[level]['xp'];
     document.getElementById("total_slots").innerHTML = progression[level]['attributes']['constitution'];
-    document.getElementById("level").innerHTML = level;
+    document.getElementById("print_level").innerHTML = level;
     for ( var attribute in progression[level]['attributes'] ) {
         document.getElementById(attribute + "_defense").innerHTML =
             progression[level]['attributes'][attribute];
@@ -31,12 +32,8 @@ function change_level() {
 
 function main() {
     document.addEventListener('DOMContentLoaded', function () {
-      document.getElementById('level_up')
-              .addEventListener('click', level_up);
-    });
-    document.addEventListener('DOMContentLoaded', function () {
-      document.getElementById('level_down')
-              .addEventListener('click', level_down);
+      document.getElementById('level_select')
+              .addEventListener('change', change_level);
     });
 }
 
