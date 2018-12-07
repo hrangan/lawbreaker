@@ -1,20 +1,4 @@
-var level=1;
 var progression = JSON.parse(document.getElementById('progression').innerHTML);
-
-function level_up() {
-    if ( level >= 10 ) {
-        return;
-    }
-    level += 1;
-    change_level();
-}
-function level_down() {
-    if ( level <= 1 ) {
-        return;
-    }
-    level -= 1;
-    change_level();
-}
 
 function change_level(event_obj) {
     level = event_obj["currentTarget"]["value"]
