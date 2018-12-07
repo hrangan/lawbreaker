@@ -76,14 +76,18 @@
             <div class="row">
                 <div class="offset-by-two one columns"><b>Name:</b></div>
                 <div class="two columns">{{content['name']}}</div>
-                <div class="one columns" ><b>XP:&nbsp;&nbsp;</b>{{content['xp']}}</div>
+                <div class="one columns" ><b>XP:&nbsp;&nbsp;</b>
+                    <span id="xp">{{content['progression']['1']['xp']}}</span>
+                </div>
                 <div class="two columns center-text">
                     <b>Level:</b>
-                    <button class="levelup" onClick="level_up()">+</button>
-                        {{ content['level'] }}
-                    <button class="levelup" onClick="level_down()">-</button>
+                     <button id="level_down" class="levelup">-</button>
+                     <span id="level">1</span>
+                     <button id="level_up" class="levelup">+</button>
                 </div>
-                <div class="two columns" ><b>HP:&nbsp;&nbsp;</b> {{content['hit_points']}} / {{content['hit_points']}}</div>
+                <div class="two columns" ><b>HP:&nbsp;&nbsp;</b>
+                    <span id="hit_points">{{content['progression']['1']['hit_points']}} / {{content['progression']['1']['hit_points']}}</span>
+                </div>
             </div>
             <br>
 
@@ -118,9 +122,9 @@
             </div>
             {% for (attribute, attribute_defense) in content["progression"]["1"]["attributes"].items() %}
             <div class="row center-text">
-                <div class="offset-by-three two columns">{{attribute_defense}}</div>
+                <div id="{{attribute}}_defense" class="offset-by-three two columns">{{attribute_defense}}</div>
                 <div class="two columns">{{attribute.title()}}</div>
-                <div class="two columns">{{attribute_defense - 10}}</div>
+                <div id="{{attribute}}_bonus" class="two columns">{{attribute_defense - 10}}</div>
             </div>
             {% endfor %}
             <br>
@@ -166,7 +170,9 @@
             </div>
             {% endfor %}
             <div class="row">
-                <div class="offset-by-eight one columns"><b>({{content['used_slots']}}/{{content['progression']["1"]['constitution']}})</b></div>
+                <div class="offset-by-eight one columns">
+                    <b>({{content['used_slots']}}/<span id="total_slots">{{content['progression']['1']['attributes']['constitution']}}</span>)</b>
+                </div>
             </div>
 
             <!-- Footnote -->

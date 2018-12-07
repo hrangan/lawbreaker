@@ -26,9 +26,9 @@ class Character(object):
 
         self.level = 1
         self.xp = 0
-        self.progression_history ={self.level: {'hit_points': self.hit_points,
-                                                'xp': 0,
-                                                'attributes': [OrderedDict(self.stats)]}
+        self.progression_history = {self.level: {'hit_points': self.hit_points,
+                                                 'xp': 0,
+                                                 'attributes': OrderedDict(self.stats)}
                                     }
         for x in range(level - 1):
             self.levelup()
@@ -51,11 +51,6 @@ class Character(object):
                      'inventory': [item.details for item in self.inventory.sorted()],
                      'traits': self.traits.traits,
                      'used_slots': self.inventory.used_slots,
-
-                     # Dynamic (level dependant)
-                     'xp': self.xp,
-                     'level': self.level,
-                     'hit_points': self.hit_points,
 
                      # Level up tracking
                      'progression': self.progression_history}
@@ -152,5 +147,5 @@ class Character(object):
             self.hit_points = hp
 
         self.progression_history[self.level] = {'hit_points': hp,
-                                                'xp': 1000 * self.level,
+                                                'xp': 1000 * (self.level - 1),
                                                 'attributes': OrderedDict(self.stats)}
