@@ -6,7 +6,7 @@ function change_level(event_obj) {
     document.getElementById("xp").innerHTML = progression[level]['xp'];
     document.getElementById("total_slots").innerHTML = progression[level]['attributes']['constitution'];
     document.getElementById("print_level").innerHTML = level;
-    document.getElementById("level").innerHTML = level;
+    document.getElementById("level").innerHTML = level + " &#x25bc;";
     for ( var attribute in progression[level]['attributes'] ) {
         document.getElementById(attribute + "_defense").innerHTML =
             progression[level]['attributes'][attribute];
