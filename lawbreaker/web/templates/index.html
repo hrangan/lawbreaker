@@ -116,7 +116,7 @@
                 <div class="two columns"><b>Attribute</b></div>
                 <div class="two columns"><b>Bonus</b></div>
             </div>
-            {% for (attribute, attribute_defense) in content["attributes"].items() %}
+            {% for (attribute, attribute_defense) in content["progression"]["1"]["attributes"].items() %}
             <div class="row center-text">
                 <div class="offset-by-three two columns">{{attribute_defense}}</div>
                 <div class="two columns">{{attribute.title()}}</div>
@@ -166,7 +166,7 @@
             </div>
             {% endfor %}
             <div class="row">
-                <div class="offset-by-eight one columns"><b>({{content['used_slots']}}/{{content['total_slots']}})</b></div>
+                <div class="offset-by-eight one columns"><b>({{content['used_slots']}}/{{content['progression']["1"]['constitution']}})</b></div>
             </div>
 
             <!-- Footnote -->

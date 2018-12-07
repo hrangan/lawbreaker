@@ -26,13 +26,12 @@ class Character(object):
 
         self.level = 1
         self.xp = 0
-        self.progression_history = [{'level': self.level,
-                                     'hit_points': self.hit_points,
-                                     'xp': 0,
-                                     'attributes_changed': []
-                                     }]
+        self.progression_history ={self.level: {'hit_points': self.hit_points,
+                                                'xp': 0,
+                                                'attributes': [OrderedDict(self.stats)]}
+                                    }
         for x in range(level - 1):
-            self.apply(**self.levelup())
+            self.levelup()
 
     def __str__(self):
         return "\n\n\n".join([self._format_basic(),
@@ -44,17 +43,21 @@ class Character(object):
         # TODO data sent to the server is at level 10. need to work out a way
         # of keeping the character at level 1, but still doing progression
         # correctly
-        character = {'id': self.id,
+        character = {
+                     # Static
+                     'id': self.id,
                      'name': self.name,
+                     'armor_defense': self.inventory.armor_defense,
+                     'inventory': [item.details for item in self.inventory.sorted()],
+                     'traits': self.traits.traits,
+                     'used_slots': self.inventory.used_slots,
+
+                     # Dynamic (level dependant)
                      'xp': self.xp,
                      'level': self.level,
                      'hit_points': self.hit_points,
-                     'attributes': self.stats,
-                     'armor_defense': self.inventory.armor_defense,
-                     'inventory': [item.details for item in self.inventory.sorted()],
-                     'used_slots': self.inventory.used_slots,
-                     'total_slots': self.inventory.total_slots,
-                     'traits': self.traits.traits,
+
+                     # Level up tracking
                      'progression': self.progression_history}
 
         return json.dumps(character)
@@ -130,34 +133,24 @@ class Character(object):
         self.inventory.add(Items.get('general_gear_1'))
         self.inventory.add(Items.get('general_gear_1'))
 
-    def apply(self, **kwargs):
-        self.progression_history.append(kwargs)
-        self.level = kwargs['level']
-        self.hit_points = kwargs['hit_points']
-        self.xp = kwargs['xp']
-        for attribute in kwargs['attributes_changed']:
-            self.stats[attribute] += 1
-
     def levelup(self):
         count = 3
+        self.level += 1
         attributes = list(self.stats)
-        attributes_changed = []
         while count > 0:
             random.shuffle(attributes)
             for attribute in attributes:
                 if (self.stats[attribute] < 20) and (dice.roll('1d20')[0] < (self.stats[attribute])):
-                    attributes_changed.append(attribute)
+                    self.stats[attribute] += 1
                     count -= 1
                     if count == 0:
                         break
-        hp = sum([dice.roll('1d8')[0] for x in range(self.level+1)])
+        hp = sum([dice.roll('1d8')[0] for x in range(self.level)])
         if hp < self.hit_points:
             hp = self.hit_points + 1
         else:
             self.hit_points = hp
 
-        return {'level': self.level + 1,
-                'hit_points': hp,
-                'xp': 1000 * self.level,
-                'attributes_changed': attributes_changed
-                }
+        self.progression_history[self.level] = {'hit_points': hp,
+                                                'xp': 1000 * self.level,
+                                                'attributes': OrderedDict(self.stats)}
