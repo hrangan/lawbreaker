@@ -13,6 +13,7 @@ function change_level(event_obj) {
         document.getElementById(attribute + "_bonus").innerHTML =
             progression[level]['attributes'][attribute] - 10;
     }
+    document.getElementById('dropdown_item').style.display="none";
 }
 
 function main() {
@@ -20,6 +21,9 @@ function main() {
       document.getElementById('dropdown_item')
               .addEventListener('click', change_level);
     });
+    document.getElementById("level_dropdown").onmouseover = function() {
+         document.getElementById('dropdown_item').style.display="block";
+            };
 }
 
 main()

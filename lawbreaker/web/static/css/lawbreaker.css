@@ -96,7 +96,6 @@ img {
     font-size: 1em;
     border: none;
     font-weight:normal;
-    min-width: 60px
 }
 
 .dropdown {
@@ -121,5 +120,3 @@ img {
 }
 
 .dropdown-content a:hover {background-color: #ddd;}
-
-.dropdown:hover .dropdown-content {display: block;}
