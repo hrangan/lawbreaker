@@ -80,15 +80,8 @@
                 </div>
                 <div class="two columns center-text noprint">
                     <b>Level:</b>
-                    <!--
-                    <select id="level_select">
-                        {% for level in content['progression'].keys()  %}
-                        <option value="{{ level }}">{{ level }}</option>
-                        {% endfor %}
-                    </select>
-                    -->
                     <div class="dropdown" id="level_dropdown">
-                      <button class="dropbtn" id="level">1 &#x25bc;</button>
+                      <button class="dropbtn" id="level"><u> 1 </u></button>
                       <div class="dropdown-content" id="dropdown_item">
                         {% for level in content['progression'].keys()  %}
                         <a>{{ level }}</a>
