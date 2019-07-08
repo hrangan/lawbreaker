@@ -15,6 +15,8 @@ Install Steps:
 
 `$ pip install .`
 
+3. For a development environment where changes are immediately reflected, pass the `-e` flag to `pip install`, or add `-e` to the start of the dependency in `requirements.txt`
+
 ### Database dependencies (if installing the web server)
 1. Install postgres and create a database for lawbreaker
 ```
