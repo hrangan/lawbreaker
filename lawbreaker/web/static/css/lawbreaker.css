@@ -92,9 +92,9 @@ img {
   .offset-by-two.column,
   .offset-by-two.columns          { margin-left: 0%; }
   .offset-by-three.column,
-  .offset-by-three.columns        { margin-left: 8.6666666666666667%; }
+  .offset-by-three.columns        { margin-left: 15%; }
   .offset-by-eight.column,
-  .offset-by-eight.columns        { margin-left: 60.6666666666666666667%; }
+  .offset-by-eight.columns        { margin-left: 76%; }
 
   .image.hack                     { width: 17%}
 
