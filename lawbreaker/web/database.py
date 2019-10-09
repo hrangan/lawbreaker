@@ -32,8 +32,7 @@ class Database(object):
         """
         self.pool = ThreadedConnectionPool(MIN_CONNECTIONS,
                                            MAX_CONNECTIONS,
-                                           dsn=os.environ['DATABASE_URL'],
-                                           sslmode='require')
+                                           dsn=os.environ['DATABASE_URL'])
         self.create_db()
         self.clear_expired()
 
