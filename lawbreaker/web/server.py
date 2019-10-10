@@ -92,7 +92,7 @@ def main():
     if os.environ.get("APP_LOCATION") == "heroku":
         serve(app, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
     else:
-        app.run(host="localhost", port=5000, debug=True)
+        app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
 
 
 if __name__ == '__main__':
