@@ -1,6 +1,6 @@
 body {
   font-family: 'Crimson Text', serif;
-  font-size:1.8em;
+  font-size: 1.08vw;
   margin-top:10px;
 }
 
@@ -75,4 +75,31 @@ img {
 .error-text {
   font-size:2em;
   text-align:center;
+}
+
+@media (orientation: portrait) {
+  /* Offsets */
+  .one.column,
+  .one.columns                    { width: 7%; }
+  .two.columns                    { width: 20%; }
+  .six.columns                    { width: 72%;            }
+  .eight.columns                  { width: 98%; }
+  .ten.columns                    { width: 100%; margin-left: 0; }
+  .twelve.columns                 { width: 100%; margin-left: 0; }
+
+  .offset-by-one.column,
+  .offset-by-one.columns          { margin-left: 0%; }
+  .offset-by-two.column,
+  .offset-by-two.columns          { margin-left: 0%; }
+  .offset-by-three.column,
+  .offset-by-three.columns        { margin-left: 15%; }
+  .offset-by-eight.column,
+  .offset-by-eight.columns        { margin-left: 76%; }
+
+  .image.hack                     { width: 17%}
+
+    body {
+      font-size: 2.8vw;
+    }
+
 }
