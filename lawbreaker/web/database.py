@@ -13,6 +13,13 @@ MAX_CONNECTIONS = 10
 
 
 class Database(object):
+    _instance = None
+
+    def __call__(cls, *args, **kwargs):
+        if cls._instance is None:
+            cls._instance = super().__call__(*args, **kwargs)
+        return cls._instance
+
     def __init__(self):
         """
         Query to aggregate expiry details grouped by day and month,
@@ -30,22 +37,24 @@ class Database(object):
         Can be created into a view with,
             CREATE VIEW name AS query
         """
-        self.pool = ThreadedConnectionPool(MIN_CONNECTIONS,
-                                           MAX_CONNECTIONS,
-                                           dsn=os.environ['DATABASE_URL'])
-        self.create_db()
-        self.clear_expired()
+        self._pool = None
 
     @contextmanager
     def connectionpool(self, *args, **kwargs):
-        conn = self.pool.getconn()
+        if self._pool is None:
+            self._pool = ThreadedConnectionPool(MIN_CONNECTIONS,
+                                                MAX_CONNECTIONS,
+                                                dsn=os.environ['DATABASE_URL'])
+            self.create_db()
+
+        conn = self._pool.getconn()
         cursor = conn.cursor()
         try:
             yield cursor
         finally:
             conn.commit()
             cursor.close()
-            self.pool.putconn(conn)
+            self._pool.putconn(conn)
 
     def create_db(self):
         with self.connectionpool() as cursor:
