@@ -176,24 +176,24 @@ class Items(object):
                       ]
 
     general_gear_2 = [Gear(item) for item in
-                      ["Incense"
-                       "Sponge"
-                       "Lens"
-                       "Perfume"
-                       "Horn"
-                       "Bottle"
-                       "Soap"
-                       "Spyglass"
-                       "Tar pot"
-                       "Twine"
-                       "Fake jewels"
-                       "Blank book"
-                       "Card deck"
-                       "Dice set"
-                       "Cook pots"
-                       "Face paint"
-                       "Whistle"
-                       "Instrument"
-                       "Quill & Ink"
+                      ["Incense",
+                       "Sponge",
+                       "Lens",
+                       "Perfume",
+                       "Horn",
+                       "Bottle",
+                       "Soap",
+                       "Spyglass",
+                       "Tar pot",
+                       "Twine",
+                       "Fake jewels",
+                       "Blank book",
+                       "Card deck",
+                       "Dice set",
+                       "Cook pots",
+                       "Face paint",
+                       "Whistle",
+                       "Instrument",
+                       "Quill & Ink",
                        "Small bell"]
                       ]
