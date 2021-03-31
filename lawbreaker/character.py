@@ -120,7 +120,7 @@ class Character(object):
         self.inventory.add(Items.get('dungeon_gear'))
         self.inventory.add(Items.get('dungeon_gear'))
         self.inventory.add(Items.get('general_gear_1'))
-        self.inventory.add(Items.get('general_gear_1'))
+        self.inventory.add(Items.get('general_gear_2'))
 
     def levelup(self):
         self.level = self.level + 1
