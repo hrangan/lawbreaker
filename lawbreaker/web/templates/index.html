@@ -27,9 +27,14 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/print.css') }}" />
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/font.css') }}" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Crimson+Text" />
+
+        <script type="text/javascript" src="{{ url_for('static', filename='scripts/lawbreaker.js') }}" defer>
+        </script>
+
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
     </head>
     <body>
+        <div id="progression" class="hidden">{{ content['progression']|tojson }}</div>
         <div class="container">
             <!-- Header -->
             <div class="row noprint header center-text">
@@ -68,12 +73,29 @@
             </div>
 
             <!-- Basic details -->
-            <div class="row">
+            <div class="row status-text">
                 <div class="offset-by-two one columns"><b>Name:</b></div>
                 <div class="two columns">{{content['name']}}</div>
-                <div class="one columns" ><b>XP:&nbsp;&nbsp;</b>{{content['xp']}}</div>
-                <div class="two columns center-text"><b>Level:&nbsp;&nbsp;</b>{{content['level']}}</div>
-                <div class="two columns" ><b>HP:&nbsp;&nbsp;</b> {{content['hit_points']}} / {{content['hit_points']}}</div>
+                <div class="one columns"><b>XP:&nbsp;&nbsp;</b><span id="xp">{{content['progression']['1']['xp']}}</span>
+                </div>
+                <div class="two columns center-text noprint">
+                    <b>Level:</b>
+                    <div class="dropdown" id="level_dropdown">
+                      <button class="dropbtn" id="level"><u> 1 </u></button>
+                      <div class="dropdown-content" id="dropdown_item">
+                        {% for level in content['progression'].keys()  %}
+                        <a>{{ level }}</a>
+                        {% endfor %}
+                      </div>
+                    </div>
+                </div>
+                <div class="two columns center-text onlyprint">
+                    <b>Level:</b>
+                    <span id="print_level">1</span>
+                </div>
+                <div class="two columns" ><b>HP:&nbsp;&nbsp;</b>
+                    <span id="hit_points">{{content['progression']['1']['hit_points']}} / {{content['progression']['1']['hit_points']}}</span>
+                </div>
             </div>
             <br>
 
@@ -106,11 +128,11 @@
                 <div class="two columns"><b>Attribute</b></div>
                 <div class="two columns"><b>Bonus</b></div>
             </div>
-            {% for (attribute, attribute_defense) in content["attributes"].items() %}
+            {% for (attribute, attribute_defense) in content["progression"]["1"]["attributes"].items() %}
             <div class="row center-text">
-                <div class="offset-by-three two columns">{{attribute_defense}}</div>
+                <div id="{{attribute}}_defense" class="offset-by-three two columns">{{attribute_defense}}</div>
                 <div class="two columns">{{attribute.title()}}</div>
-                <div class="two columns">{{attribute_defense - 10}}</div>
+                <div id="{{attribute}}_bonus" class="two columns">{{attribute_defense - 10}}</div>
             </div>
             {% endfor %}
             <br>
@@ -156,7 +178,9 @@
             </div>
             {% endfor %}
             <div class="row">
-                <div class="offset-by-eight one columns"><b>({{content['used_slots']}}/{{content['total_slots']}})</b></div>
+                <div class="offset-by-eight one columns">
+                    <b>({{content['used_slots']}}/<span id="total_slots">{{content['progression']['1']['attributes']['constitution']}}</span>)</b>
+                </div>
             </div>
 
             <!-- Footnote -->

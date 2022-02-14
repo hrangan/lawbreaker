@@ -25,10 +25,13 @@ class Character(object):
         self._basic_loadout()
 
         self.level = 1
+        self.xp = 0
+        self.progression_history = {self.level: {'hit_points': self.hit_points,
+                                                 'xp': 0,
+                                                 'attributes': OrderedDict(self.stats)}
+                                    }
         for x in range(level - 1):
             self.levelup()
-        assert self.level == level
-        self.xp = 1000 * (self.level - 1)
 
     def __str__(self):
         return "\n\n\n".join([self._format_basic(),
@@ -37,17 +40,20 @@ class Character(object):
                               str(self.traits)])
 
     def __repr__(self):
-        character = {'id': self.id,
+        # TODO data sent to the server is at level 10. need to work out a way
+        # of keeping the character at level 1, but still doing progression
+        # correctly
+        character = {
+                     # Static
+                     'id': self.id,
                      'name': self.name,
-                     'xp': self.xp,
-                     'level': self.level,
-                     'hit_points': self.hit_points,
-                     'attributes': self.stats,
                      'armor_defense': self.inventory.armor_defense,
                      'inventory': [item.details for item in self.inventory.sorted()],
+                     'traits': self.traits.traits,
                      'used_slots': self.inventory.used_slots,
-                     'total_slots': self.inventory.total_slots,
-                     'traits': self.traits.traits}
+
+                     # Level up tracking
+                     'progression': self.progression_history}
 
         return json.dumps(character)
 
@@ -123,8 +129,8 @@ class Character(object):
         self.inventory.add(Items.get('general_gear_2'))
 
     def levelup(self):
-        self.level = self.level + 1
         count = 3
+        self.level += 1
         attributes = list(self.stats)
         while count > 0:
             random.shuffle(attributes)
@@ -136,6 +142,10 @@ class Character(object):
                         break
         hp = sum([dice.roll('1d8')[0] for x in range(self.level)])
         if hp < self.hit_points:
-            self.hit_points += 1
+            hp = self.hit_points + 1
         else:
             self.hit_points = hp
+
+        self.progression_history[self.level] = {'hit_points': hp,
+                                                'xp': 1000 * (self.level - 1),
+                                                'attributes': OrderedDict(self.stats)}

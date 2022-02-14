@@ -54,7 +54,7 @@ def security_headers(response):
                                                    "font-src 'self' https://fonts.gstatic.com data;"
                                                    "img-src 'self';"
                                                    "object-src 'none';"
-                                                   "script-src 'none';"
+                                                   "script-src 'self';"
                                                    "style-src 'self' https://fonts.googleapis.com;"
                                                    "frame-ancestors 'self'"
                                                    )
@@ -70,7 +70,7 @@ def error404(error):
 
 @app.route('/')
 def generate_character():
-    character = Character(name=Name.get())
+    character = Character(name=Name.get(), level=10)
     character_json = repr(character)
     db.insert(character.id, character_json)
     return render_template('index.html', content=json.loads(character_json, object_pairs_hook=OrderedDict))
